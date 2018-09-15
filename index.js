@@ -15,9 +15,13 @@ function onWindowResize() {
 }
 
 // Create skybox cube
-const skyGeometry = new THREE.BoxGeometry(1000, 1000, -100);
-const skyMaterial = new THREE.MeshBasicMaterial({color: 'grey'});
-const skybox = new THREE.Mesh(skyGeometry, skyMaterial);
+
+const starTexture = new THREE.TextureLoader().load( 'stars.jpg' );
+const starMaterial = new THREE.MeshBasicMaterial( { map: starTexture } );
+
+const skyGeometry = new THREE.BoxGeometry(200, 200, -100);
+
+const skybox = new THREE.Mesh(skyGeometry, starMaterial);
 scene.add(skybox);
 
 // Create Sun
