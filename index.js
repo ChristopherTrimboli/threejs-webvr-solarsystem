@@ -29,7 +29,7 @@ scene.add(skybox);
 const sunTexture = new THREE.TextureLoader().load( 'sunbumpmap.jpg' );
 const sunMaterial = new THREE.MeshBasicMaterial( { map: sunTexture } );
 
-const sunGeometry = new THREE.SphereGeometry(69, 100, 100);
+const sunGeometry = new THREE.SphereGeometry(6, 100, 100);
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
 
@@ -61,7 +61,7 @@ const earthMaterial = new THREE.MeshBasicMaterial( { map: earthTexture } );
 const earthGeometry = new THREE.SphereGeometry(12, 100, 100);
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 scene.add(sunLight);
-earth.position.x = 1496;
+earth.position.x = 14;
 
 // Orbit Earth around the sun
 const earthPivot = new THREE.Object3D();
