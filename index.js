@@ -3,7 +3,7 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHe
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+document.body.appendChild(renderer.domElement);
 
 // Resize window size on re-size
 
@@ -62,12 +62,16 @@ const sunLight = new THREE.PointLight('#ff8000', 100, 1000);
 sunLight.position.set(0, 0, 0);
 scene.add(sunLight);
 
+const controls = new THREE.OrbitControls( camera );
+controls.update();
+
 camera.position.set(0,10,75);
 
 const animate = function () {
   requestAnimationFrame(animate);
   earthPivot.rotation.y += 0.005;
   moonPivot.rotation.y += 0.003;
+  controls.update();
 
   renderer.render(scene, camera);
 };
