@@ -101,9 +101,9 @@ jupiterPivot.add(jupiter);
 
 // Camera controls
 
-const controls = new THREE.OrbitControls( camera );
-controls.update();
-camera.position.set(0,1000,5000);
+// const controls = new THREE.OrbitControls( camera );
+// controls.update();
+// camera.position.set(0,1000,5000);
 
 if (navigator.getVRDisplays) {
   navigator.getVRDisplays()
@@ -124,7 +124,7 @@ const animate = function () {
   earthPivot.rotation.y += 0.00005;
   moonPivot.rotation.y += 0.003;
   jupiterPivot.rotation.y += 0.002;
-  controls.update();
+  // controls.update();
 
   renderer.render(scene, camera);
 };
