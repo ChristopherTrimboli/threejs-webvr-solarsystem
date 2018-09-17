@@ -19,9 +19,16 @@ function onWindowResize() {
 
 // Create skybox cube
 
-const starTexture = new THREE.TextureLoader().load( 'stars2.jpg' );
-const starMaterial = new THREE.MeshBasicMaterial( { map: starTexture } );
+const loader = new THREE.CubeTextureLoader();
+loader.setPath( './images/milky_way-cubemap/' );
 
+const starsTextureCube = loader.load( [
+  'GalaxyTex_NegativeX.png', 'GalaxyTex_PositiveX.png',
+  'GalaxyTex_NegativeY.png', 'GalaxyTex_PositiveY.png',
+  'GalaxyTex_PositiveZ.png', 'GalaxyTex_NegativeZ.png'
+] );
+
+const starMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: starsTextureCube } );
 const skyGeometry = new THREE.BoxGeometry(100000, 100000, -100000);
 
 const skybox = new THREE.Mesh(skyGeometry, starMaterial);
@@ -29,7 +36,7 @@ scene.add(skybox);
 
 // Create Sun
 
-const sunTexture = new THREE.TextureLoader().load( 'sunbumpmap.jpg' );
+const sunTexture = new THREE.TextureLoader().load( './images/sunbumpmap.jpg' );
 const sunMaterial = new THREE.MeshBasicMaterial( { map: sunTexture } );
 
 const sunGeometry = new THREE.SphereGeometry(695, 100, 100);
@@ -43,7 +50,7 @@ scene.add(sunLight);
 
 // create mercury
 
-const mercuryTexture = new THREE.TextureLoader().load( 'mercurybumpmap.jpg' );
+const mercuryTexture = new THREE.TextureLoader().load( './images/mercurybumpmap.jpg' );
 const mercuryMaterial = new THREE.MeshBasicMaterial( { map: mercuryTexture } );
 
 const mercuryGeometry = new THREE.SphereGeometry(1, 100, 100);
@@ -58,7 +65,7 @@ mercuryPivot.add(mercury);
 
 // Create Earth
 
-const earthTexture = new THREE.TextureLoader().load( 'earthbumpmap.jpg' );
+const earthTexture = new THREE.TextureLoader().load( './images/earthbumpmap.jpg' );
 const earthMaterial = new THREE.MeshBasicMaterial( { map: earthTexture } );
 
 const earthGeometry = new THREE.SphereGeometry(12.7, 100, 100);
@@ -73,7 +80,7 @@ earthPivot.add(earth);
 
 // Create the Moon
 
-const moonTexture = new THREE.TextureLoader().load( 'moonbumpmap.jpg' );
+const moonTexture = new THREE.TextureLoader().load( './images/moonbumpmap.jpg' );
 const moonMaterial = new THREE.MeshBasicMaterial( { map: moonTexture } );
 
 const moonGeometry = new THREE.SphereGeometry(3.5, 100, 100);
@@ -89,7 +96,7 @@ moonPivot.add(moon);
 
 // Create mars
 
-const marsTexture = new THREE.TextureLoader().load( 'marsbumpmap.jpg' );
+const marsTexture = new THREE.TextureLoader().load( './images/marsbumpmap.jpg' );
 const marsMaterial = new THREE.MeshBasicMaterial( { map: marsTexture } );
 
 const marsGeometry = new THREE.SphereGeometry(6.8, 100, 100);
@@ -104,7 +111,7 @@ marsPivot.add(mars);
 
 // Create jupiter
 
-const jupiterTexture = new THREE.TextureLoader().load( 'jupiterbumpmap.jpg' );
+const jupiterTexture = new THREE.TextureLoader().load( './images/jupiterbumpmap.jpg' );
 const jupiterMaterial = new THREE.MeshBasicMaterial( { map: jupiterTexture } );
 
 const jupiterGeometry = new THREE.SphereGeometry(139.8, 20, 20);
