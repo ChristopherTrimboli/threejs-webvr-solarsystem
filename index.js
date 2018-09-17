@@ -2,7 +2,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 10000 );
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
+// renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
 
 // Resize window size on re-size
@@ -11,7 +11,7 @@ window.addEventListener("resize", onWindowResize, false);
 function onWindowResize() {
   // camera.aspect = window.innerWidth / window.innerHeight;
   // camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  // renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 // Create skybox cube
@@ -105,6 +105,21 @@ jupiterPivot.add(jupiter);
 // controls.update();
 // camera.position.set(0,1000,5000);
 
+
+
+const animate = function () {
+  requestAnimationFrame(animate);
+  sun.position.set( 0, 5, 0 );
+  earthPivot.rotation.y += 0.00005;
+  moonPivot.rotation.y += 0.003;
+  jupiterPivot.rotation.y += 0.002;
+  // controls.update();
+
+  renderer.render(scene, camera);
+};
+
+animate();
+
 if (navigator.getVRDisplays) {
   navigator.getVRDisplays()
     .then(displays => {
@@ -119,15 +134,4 @@ if (navigator.getVRDisplays) {
     });
 }
 
-const animate = function () {
-  requestAnimationFrame(animate);
-  sun.position.set( 0, 5, 0 );
-  earthPivot.rotation.y += 0.00005;
-  moonPivot.rotation.y += 0.003;
-  jupiterPivot.rotation.y += 0.002;
-  // controls.update();
 
-  renderer.render(scene, camera);
-};
-
-animate();
