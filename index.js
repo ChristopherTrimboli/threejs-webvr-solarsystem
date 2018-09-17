@@ -105,6 +105,20 @@ const controls = new THREE.OrbitControls( camera );
 controls.update();
 camera.position.set(0,1000,5000);
 
+if (navigator.getVRDisplays) {
+  navigator.getVRDisplays()
+    .then(displays => {
+      const presentingDisplay = displays.find(display => display.isPresenting);
+      if (presentingDisplay) {
+        renderer.vr.enabled = true;
+        renderer.vr.setDevice(presentingDisplay);
+      }
+    })
+    .catch(err => {
+      console.warn(err);
+    });
+}
+
 const animate = function () {
   requestAnimationFrame(animate);
   earthPivot.rotation.y += 0.00005;
