@@ -21,7 +21,7 @@ function onWindowResize() {
 const starTexture = new THREE.TextureLoader().load( 'stars2.jpg' );
 const starMaterial = new THREE.MeshBasicMaterial( { map: starTexture } );
 
-const skyGeometry = new THREE.BoxGeometry(10000, 10000, -10000);
+const skyGeometry = new THREE.BoxGeometry(100, 100, -100);
 
 const skybox = new THREE.Mesh(skyGeometry, starMaterial);
 scene.add(skybox);
@@ -36,7 +36,7 @@ const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
 
 // Add pointlight to sun
-const sunLight = new THREE.PointLight('#ffb013', 100, 1000);
+const sunLight = new THREE.PointLight('#ffb013', 100, 100);
 sunLight.position.set(0, 0, 0);
 scene.add(sunLight);
 
@@ -60,7 +60,7 @@ mercuryPivot.add(mercury);
 const earthTexture = new THREE.TextureLoader().load( 'earthbumpmap.jpg' );
 const earthMaterial = new THREE.MeshBasicMaterial( { map: earthTexture } );
 
-const earthGeometry = new THREE.SphereGeometry(12, 100, 100);
+const earthGeometry = new THREE.SphereGeometry(1, 100, 100);
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 scene.add(sunLight);
 earth.position.x = 14;
@@ -75,7 +75,7 @@ earthPivot.add(earth);
 const moonTexture = new THREE.TextureLoader().load( 'moonbumpmap.jpg' );
 const moonMaterial = new THREE.MeshBasicMaterial( { map: moonTexture } );
 
-const moonGeometry = new THREE.SphereGeometry(3.5, 100, 100);
+const moonGeometry = new THREE.SphereGeometry(1, 100, 100);
 const moon = new THREE.Mesh(moonGeometry, moonMaterial);
 scene.add(moon);
 moon.position.x = 15.5;
@@ -88,11 +88,11 @@ moonPivot.add(moon);
 
 // Create jupiter
 
-const jupiterGeometry = new THREE.SphereGeometry(4, 20, 20);
+const jupiterGeometry = new THREE.SphereGeometry(1, 20, 20);
 const jupiterMaterial = new THREE.MeshBasicMaterial({color: '#ec151e'});
 const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
 scene.add(jupiter);
-jupiter.position.x = 60;
+jupiter.position.x = 30;
 
 // Orbit Jupiter around the sun
 
@@ -111,7 +111,6 @@ jupiterPivot.add(jupiter);
 
 const animate = function () {
   requestAnimationFrame(animate);
-  sun.position.set( 0, 5, 0 );
   earthPivot.rotation.y += 0.00005;
   moonPivot.rotation.y += 0.003;
   jupiterPivot.rotation.y += 0.002;
