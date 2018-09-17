@@ -1,3 +1,6 @@
+// Planets are 1:1000
+// Distances are 1:100,000
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 100000 );
 
@@ -41,24 +44,22 @@ scene.add(sunLight);
 // create mercury
 
 const mercuryGeometry = new THREE.SphereGeometry(1, 100, 100);
-const mercuryMaterial = new THREE.MeshBasicMaterial({color: '#B26919'});
+const mercuryMaterial = new THREE.MeshBasicMaterial({color: '#b28755'});
 const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
 scene.add(mercury);
-mercury.position.x = 20;
+mercury.position.x = 927;
 
 // Orbit mercury around the sun
 const mercuryPivot = new THREE.Object3D();
 sun.add(mercuryPivot);
 mercuryPivot.add(mercury);
 
-
-
 // Create Earth
 
 const earthTexture = new THREE.TextureLoader().load( 'earthbumpmap.jpg' );
 const earthMaterial = new THREE.MeshBasicMaterial( { map: earthTexture } );
 
-const earthGeometry = new THREE.SphereGeometry(12, 100, 100);
+const earthGeometry = new THREE.SphereGeometry(12.7, 100, 100);
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 scene.add(sunLight);
 earth.position.x = 1496;
@@ -76,7 +77,7 @@ const moonMaterial = new THREE.MeshBasicMaterial( { map: moonTexture } );
 const moonGeometry = new THREE.SphereGeometry(3.5, 100, 100);
 const moon = new THREE.Mesh(moonGeometry, moonMaterial);
 scene.add(moon);
-moon.position.x = 15.5;
+moon.position.x = 20;
 
 // Orbit moon around earth
 
@@ -84,13 +85,30 @@ const moonPivot = new THREE.Object3D();
 earth.add(moonPivot);
 moonPivot.add(moon);
 
+// Create mars
+
+const marsTexture = new THREE.TextureLoader().load( 'marsbumpmap.jpg' );
+const marsMaterial = new THREE.MeshBasicMaterial( { map: marsTexture } );
+
+const marsGeometry = new THREE.SphereGeometry(6.8, 100, 100);
+const mars = new THREE.Mesh(marsGeometry, marsMaterial);
+scene.add(mars);
+mars.position.x = 2627;
+
+// Orbit mars around the sun
+const marsPivot = new THREE.Object3D();
+sun.add(marsPivot);
+marsPivot.add(mars);
+
 // Create jupiter
 
-const jupiterGeometry = new THREE.SphereGeometry(4, 20, 20);
-const jupiterMaterial = new THREE.MeshBasicMaterial({color: '#ec151e'});
+const jupiterTexture = new THREE.TextureLoader().load( 'jupiterbumpmap.jpg' );
+const jupiterMaterial = new THREE.MeshBasicMaterial( { map: marsTexture } );
+
+const jupiterGeometry = new THREE.SphereGeometry(139.8, 20, 20);
 const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
 scene.add(jupiter);
-jupiter.position.x = 60;
+jupiter.position.x = 8133;
 
 // Orbit Jupiter around the sun
 
@@ -123,7 +141,7 @@ const animate = function () {
   requestAnimationFrame(animate);
   earthPivot.rotation.y += 0.00005;
   moonPivot.rotation.y += 0.003;
-  jupiterPivot.rotation.y += 0.002;
+  jupiterPivot.rotation.y += 0.00002;
   controls.update();
 
   renderer.render(scene, camera);
