@@ -2,9 +2,9 @@
 // Distances are 1:100,000
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 100000 );
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 100000);
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
 
@@ -28,11 +28,11 @@ const starsTextureCube = loader.load( [
   'GalaxyTex_PositiveZ.png', 'GalaxyTex_NegativeZ.png'
 ] );
 
-const starMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: starsTextureCube } );
-const skyGeometry = new THREE.BoxGeometry(100000, 100000, -100000);
+const starMaterial = new THREE.MeshBasicMaterial({envMap: starsTextureCube});
+const starGeometry = new THREE.CubeGeometry(100000, 100000, -100000);
 
-const skybox = new THREE.Mesh(skyGeometry, starMaterial);
-scene.add(skybox);
+const starbox = new THREE.Mesh(starGeometry, starMaterial);
+scene.add(starbox);
 
 // Create Sun
 
@@ -146,8 +146,7 @@ if (navigator.getVRDisplays) {
     });
 }
 
-const animate = function () {
-  requestAnimationFrame(animate);
+const spinPlanets = function () {
   sun.rotation.y += 0.0002;
   mercuryPivot.rotation.y += 0.0001;
   mercury.rotation.y += 0.0002;
@@ -159,6 +158,11 @@ const animate = function () {
   mars.rotation.y += 0.0002;
   jupiterPivot.rotation.y += 0.00002;
   jupiter.rotation.y += 0.0002;
+};
+
+const animate = function () {
+  requestAnimationFrame(animate);
+  spinPlanets();
   controls.update();
 
   renderer.render(scene, camera);
