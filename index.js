@@ -17,20 +17,21 @@ function onWindowResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-// Create skybox cube
+// create starbox
 
-const loader = new THREE.CubeTextureLoader();
-loader.setPath( './images/' );
+const imagePrefix = "images/milky_way-cubemap/";
+const directions  = ["GalaxyTex_PositiveX", "GalaxyTex_NegativeX", "GalaxyTex_PositiveY",
+  "GalaxyTex_NegativeY", "GalaxyTex_PositiveZ", "GalaxyTex_NegativeZ"];
+const imageSuffix = ".png";
 
-const starsTextureCube = loader.load( [
-  'uv_checker.png', 'uv_checker.png',
-  'uv_checker.png', 'uv_checker.png',
-  'uv_checker.png', 'uv_checker.png'
-] );
-
-const starMaterial = new THREE.MeshBasicMaterial({envMap: starsTextureCube});
-const starGeometry = new THREE.CubeGeometry(10000, 10000, -10000);
-
+let materialArray = [];
+for (let i = 0; i < 6; i++)
+  materialArray.push( new THREE.MeshBasicMaterial({
+    map: THREE.ImageUtils.loadTexture( imagePrefix + directions[i] + imageSuffix ),
+    side: THREE.FrontSide
+  }));
+const starMaterial = new THREE.MeshFaceMaterial( materialArray );
+const starGeometry = new THREE.CubeGeometry(100000, 100000, -100000);
 const starbox = new THREE.Mesh(starGeometry, starMaterial);
 scene.add(starbox);
 
@@ -44,6 +45,7 @@ const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
 
 // Add pointlight to sun
+
 const light = new THREE.AmbientLight( 0x404040 ); // soft white light
 scene.add( light );
 
@@ -72,6 +74,7 @@ const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 earth.position.x = 1496;
 
 // Orbit Earth around the sun
+
 const earthPivot = new THREE.Object3D();
 sun.add(earthPivot);
 earthPivot.add(earth);
