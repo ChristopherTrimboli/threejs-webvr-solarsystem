@@ -1,5 +1,5 @@
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 100000 );
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 10000 );
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -19,7 +19,7 @@ function onWindowResize() {
 const starTexture = new THREE.TextureLoader().load( 'stars2.jpg' );
 const starMaterial = new THREE.MeshBasicMaterial( { map: starTexture } );
 
-const skyGeometry = new THREE.BoxGeometry(100000, 100000, -100000);
+const skyGeometry = new THREE.BoxGeometry(10000, 10000, -10000);
 
 const skybox = new THREE.Mesh(skyGeometry, starMaterial);
 scene.add(skybox);
@@ -29,7 +29,7 @@ scene.add(skybox);
 const sunTexture = new THREE.TextureLoader().load( 'sunbumpmap.jpg' );
 const sunMaterial = new THREE.MeshBasicMaterial( { map: sunTexture } );
 
-const sunGeometry = new THREE.SphereGeometry(695, 100, 100);
+const sunGeometry = new THREE.SphereGeometry(69, 100, 100);
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
 
