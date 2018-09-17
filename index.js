@@ -121,6 +121,7 @@ if (navigator.getVRDisplays) {
 
 const animate = function () {
   requestAnimationFrame(animate);
+  sun.position.set( 0, 5, 0 );
   earthPivot.rotation.y += 0.00005;
   moonPivot.rotation.y += 0.003;
   jupiterPivot.rotation.y += 0.002;
