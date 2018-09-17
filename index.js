@@ -43,8 +43,10 @@ scene.add(sunLight);
 
 // create mercury
 
+const mercuryTexture = new THREE.TextureLoader().load( 'mercurybumpmap.jpg' );
+const mercuryMaterial = new THREE.MeshBasicMaterial( { map: mercuryTexture } );
+
 const mercuryGeometry = new THREE.SphereGeometry(1, 100, 100);
-const mercuryMaterial = new THREE.MeshBasicMaterial({color: '#b28755'});
 const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
 scene.add(mercury);
 mercury.position.x = 927;
@@ -139,9 +141,17 @@ if (navigator.getVRDisplays) {
 
 const animate = function () {
   requestAnimationFrame(animate);
+  sun.rotation.y += 0.0002;
+  mercuryPivot.rotation.y += 0.0001;
+  mercury.rotation.y += 0.0002;
   earthPivot.rotation.y += 0.00005;
+  earth.rotation.y += 0.0004;
   moonPivot.rotation.y += 0.003;
+  moon.rotation.y += 0.0002;
+  marsPivot.rotation.y += 0.0005;
+  mars.rotation.y += 0.0002;
   jupiterPivot.rotation.y += 0.00002;
+  jupiter.rotation.y += 0.0002;
   controls.update();
 
   renderer.render(scene, camera);
