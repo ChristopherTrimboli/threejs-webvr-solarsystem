@@ -103,7 +103,7 @@ marsPivot.add(mars);
 // Create jupiter
 
 const jupiterTexture = new THREE.TextureLoader().load( 'jupiterbumpmap.jpg' );
-const jupiterMaterial = new THREE.MeshBasicMaterial( { map: marsTexture } );
+const jupiterMaterial = new THREE.MeshBasicMaterial( { map: jupiterTexture } );
 
 const jupiterGeometry = new THREE.SphereGeometry(139.8, 20, 20);
 const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
