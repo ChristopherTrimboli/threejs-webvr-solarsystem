@@ -1,5 +1,5 @@
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 100000 );
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -19,30 +19,49 @@ function onWindowResize() {
 const starTexture = new THREE.TextureLoader().load( 'stars2.jpg' );
 const starMaterial = new THREE.MeshBasicMaterial( { map: starTexture } );
 
-const skyGeometry = new THREE.BoxGeometry(1000, 1000, -1000);
+const skyGeometry = new THREE.BoxGeometry(100000, 100000, -100000);
 
 const skybox = new THREE.Mesh(skyGeometry, starMaterial);
 scene.add(skybox);
 
 // Create Sun
 
-const sunGeometry = new THREE.SphereGeometry(5, 32, 32);
-const sunMaterial = new THREE.MeshBasicMaterial({color: '#ECBD2C'});
+const sunTexture = new THREE.TextureLoader().load( 'sunbumpmap.jpg' );
+const sunMaterial = new THREE.MeshBasicMaterial( { map: sunTexture } );
+
+const sunGeometry = new THREE.SphereGeometry(695, 100, 100);
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
 
 // Add pointlight to sun
-const sunLight = new THREE.PointLight('#ff8000', 100, 1000);
+const sunLight = new THREE.PointLight('#ffb013', 100, 1000);
 sunLight.position.set(0, 0, 0);
 scene.add(sunLight);
 
+// create mercury
+
+const mercuryGeometry = new THREE.SphereGeometry(1, 100, 100);
+const mercuryMaterial = new THREE.MeshBasicMaterial({color: '#B26919'});
+const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
+scene.add(mercury);
+mercury.position.x = 20;
+
+// Orbit mercury around the sun
+const mercuryPivot = new THREE.Object3D();
+sun.add(mercuryPivot);
+mercuryPivot.add(mercury);
+
+
+
 // Create Earth
 
-const earthGeometry = new THREE.SphereGeometry(2, 20, 20);
-const earthMaterial = new THREE.MeshBasicMaterial({color: '#31ec3e'});
+const earthTexture = new THREE.TextureLoader().load( 'earthbumpmap.jpg' );
+const earthMaterial = new THREE.MeshBasicMaterial( { map: earthTexture } );
+
+const earthGeometry = new THREE.SphereGeometry(12, 100, 100);
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 scene.add(sunLight);
-earth.position.x = 30;
+earth.position.x = 1496;
 
 // Orbit Earth around the sun
 const earthPivot = new THREE.Object3D();
@@ -51,11 +70,13 @@ earthPivot.add(earth);
 
 // Create the Moon
 
-const moonGeometry = new THREE.SphereGeometry(1, 5, 5);
-const moonMaterial = new THREE.MeshBasicMaterial({color: 'white'});
+const moonTexture = new THREE.TextureLoader().load( 'moonbumpmap.jpg' );
+const moonMaterial = new THREE.MeshBasicMaterial( { map: moonTexture } );
+
+const moonGeometry = new THREE.SphereGeometry(3.5, 100, 100);
 const moon = new THREE.Mesh(moonGeometry, moonMaterial);
 scene.add(moon);
-moon.position.x = 5;
+moon.position.x = 15.5;
 
 // Orbit moon around earth
 
@@ -82,11 +103,11 @@ jupiterPivot.add(jupiter);
 
 const controls = new THREE.OrbitControls( camera );
 controls.update();
-camera.position.set(0,10,75);
+camera.position.set(0,1000,5000);
 
 const animate = function () {
   requestAnimationFrame(animate);
-  earthPivot.rotation.y += 0.005;
+  earthPivot.rotation.y += 0.00005;
   moonPivot.rotation.y += 0.003;
   jupiterPivot.rotation.y += 0.002;
   controls.update();
