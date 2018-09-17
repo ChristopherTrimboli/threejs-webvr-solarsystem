@@ -16,10 +16,10 @@ function onWindowResize() {
 
 // Create skybox cube
 
-const starTexture = new THREE.TextureLoader().load( 'stars.jpg' );
+const starTexture = new THREE.TextureLoader().load( 'stars2.jpg' );
 const starMaterial = new THREE.MeshBasicMaterial( { map: starTexture } );
 
-const skyGeometry = new THREE.BoxGeometry(500, 500, -500);
+const skyGeometry = new THREE.BoxGeometry(1000, 1000, -1000);
 
 const skybox = new THREE.Mesh(skyGeometry, starMaterial);
 scene.add(skybox);
