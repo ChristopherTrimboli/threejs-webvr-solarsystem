@@ -1,6 +1,8 @@
 // Planets are 1:1000
 // Distances are 1:100,000
 
+
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 150000);
 
@@ -16,6 +18,37 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
+// dat GUI
+
+
+
+window.onload = function() {
+
+  const FizzyText = function() {
+    this.music = true;
+  };
+
+  const gui = new dat.GUI();
+
+  const text = new FizzyText();
+
+  const controller = gui.add(text, 'music', true);
+
+  controller.onChange(function(value) {
+    if(value){
+      backgroundMusic.play();
+    }
+    else{
+      backgroundMusic.pause();
+    }
+  });
+
+  controller.onFinishChange(function(value) {
+    // Fires when a controller loses focus.
+
+  });
+};
 
 // Music
 
