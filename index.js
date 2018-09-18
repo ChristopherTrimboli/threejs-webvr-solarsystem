@@ -19,6 +19,9 @@ if(navigator.getVRDisplays){
   console.log("VR displays detected");
   renderer.vr.enabled = true;
   renderer.vr.userHeight = 0;
+  document.body.appendChild(
+    WEBVR.createButton(renderer, {frameOfReferenceType: "head-model"})
+  );
 }
 else{
   console.log("No VR displays detected");
