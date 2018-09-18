@@ -173,6 +173,8 @@ jupiterPivot.add(jupiter);
 // Camera controls
 
 const controls = new THREE.OrbitControls( camera );
+controls.minDistance = 1000;
+controls.maxDistance = 50000;
 controls.update();
 camera.position.set(0,1000,5000);
 
