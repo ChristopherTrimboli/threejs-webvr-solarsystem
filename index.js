@@ -11,6 +11,8 @@ const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'hig
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
 
+const controls = new THREE.OrbitControls( camera );
+
 // VR support
 
 if(navigator.getVRDisplays){
@@ -18,7 +20,13 @@ if(navigator.getVRDisplays){
   renderer.vr.enabled = true;
   renderer.vr.userHeight = 0;
 }
-else console.log("No VR displays detected");
+else{
+  console.log("No VR displays detected");
+  controls.minDistance = 1000;
+  controls.maxDistance = 50000;
+  controls.update();
+  camera.position.set(0,1000,5000);
+}
 
 // Resize window size on re-size
 
@@ -246,14 +254,6 @@ center.add(jupiterPivot);
 jupiterPivot.add(jupiter);
 
 
-// Camera controls
-
-const controls = new THREE.OrbitControls( camera );
-controls.minDistance = 1000;
-controls.maxDistance = 50000;
-controls.update();
-camera.position.set(0,1000,5000);
-
 const spinPlanets = function () {
   sun.rotation.y += 0.0001;
   mercury.rotation.y += 0.0002;
@@ -271,6 +271,8 @@ const orbitPlanets = function () {
   jupiterPivot.rotation.y += 0.00002;
 };
 
+
+
 const animate = function () {
   if(!pause_orbit_global){
     orbitPlanets();
@@ -279,7 +281,9 @@ const animate = function () {
     spinPlanets();
   }
   requestAnimationFrame(animate);
-  controls.update();
+  if(!navigator.getVRDisplays){
+    controls.update();
+  }
   renderer.render(scene, camera);
 };
 
