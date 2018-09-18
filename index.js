@@ -29,15 +29,13 @@ else{
   controls.maxDistance = 50000;
   controls.update();
   camera.position.set(0,1000,5000);
-}
 
-// Resize window size on re-size
-
-window.addEventListener("resize", onWindowResize, false);
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  window.addEventListener("resize", onWindowResize, false);
+  function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
 }
 
 // dat GUI
