@@ -1,7 +1,8 @@
 // Planets are 1:1000
 // Distances are 1:100,000
 
-
+let pause_spin_global = false;
+let pause_orbit_global = false;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 150000);
@@ -27,15 +28,19 @@ window.onload = function() {
 
   const FizzyText = function() {
     this.music = true;
+    this.pause_orbit = false;
+    this.pause_spin = false;
   };
 
   const gui = new dat.GUI();
 
   const text = new FizzyText();
 
-  const controller = gui.add(text, 'music', true);
+  const musicController = gui.add(text, 'music', true);
+  const pause_orbitController = gui.add(text, 'pause_orbit', false);
+  const pause_spinController = gui.add(text, 'pause_spin', false);
 
-  controller.onChange(function(value) {
+  musicController.onChange(function(value) {
     if(value){
       backgroundMusic.play();
     }
@@ -44,10 +49,24 @@ window.onload = function() {
     }
   });
 
-  controller.onFinishChange(function(value) {
-    // Fires when a controller loses focus.
-
+  pause_orbitController.onChange(function(value) {
+    if(value){
+      pause_orbit_global = true;
+    }
+    else{
+      pause_orbit_global = false;
+    }
   });
+
+  pause_spinController.onChange(function(value) {
+    if(value){
+      pause_spin_global = true;
+    }
+    else{
+      pause_spin_global = false;
+    }
+  });
+
 };
 
 // Music
@@ -119,6 +138,15 @@ starbox.position.set(
   camera.position.z
 );
 
+// create center point that isnt tied to the sun, because orbit mechanics
+
+const centerMaterial = new THREE.MeshBasicMaterial( { color: 'black' } );
+const centerGeometry = new THREE.SphereGeometry(1, 1, 1);
+const center = new THREE.Mesh(centerGeometry, centerMaterial);
+scene.add(center);
+center.position.set(0,0,0);
+
+
 // Create Sun
 
 const sunTexture = new THREE.TextureLoader().load( './images/sunbumpmap.jpg' );
@@ -145,7 +173,7 @@ mercury.position.x = 927;
 
 // Orbit mercury around the sun
 const mercuryPivot = new THREE.Object3D();
-sun.add(mercuryPivot);
+center.add(mercuryPivot);
 mercuryPivot.add(mercury);
 
 // Create Earth
@@ -160,7 +188,7 @@ earth.position.x = 1496;
 // Orbit Earth around the sun
 
 const earthPivot = new THREE.Object3D();
-sun.add(earthPivot);
+center.add(earthPivot);
 earthPivot.add(earth);
 
 // Create the Moon
@@ -191,7 +219,7 @@ mars.position.x = 2627;
 
 // Orbit mars around the sun
 const marsPivot = new THREE.Object3D();
-sun.add(marsPivot);
+center.add(marsPivot);
 marsPivot.add(mars);
 
 // Create jupiter
@@ -207,7 +235,7 @@ jupiter.position.x = 8133;
 // Orbit Jupiter around the sun
 
 const jupiterPivot = new THREE.Object3D();
-sun.add(jupiterPivot);
+center.add(jupiterPivot);
 jupiterPivot.add(jupiter);
 
 
@@ -234,24 +262,31 @@ if (navigator.getVRDisplays) {
 }
 
 const spinPlanets = function () {
-  sun.rotation.y += 0.0002;
-  mercuryPivot.rotation.y += 0.0001;
+  sun.rotation.y += 0.0001;
   mercury.rotation.y += 0.0002;
-  earthPivot.rotation.y += 0.00005;
   earth.rotation.y += 0.0004;
-  moonPivot.rotation.y += 0.003;
   moon.rotation.y += 0.0002;
-  marsPivot.rotation.y += 0.0005;
   mars.rotation.y += 0.0002;
-  jupiterPivot.rotation.y += 0.00002;
   jupiter.rotation.y += 0.0002;
 };
 
-const animate = function () {
-  requestAnimationFrame(animate);
-  spinPlanets();
-  controls.update();
+const orbitPlanets = function () {
+  mercuryPivot.rotation.y += 0.0001;
+  earthPivot.rotation.y += 0.00008;
+  moonPivot.rotation.y += 0.003;
+  marsPivot.rotation.y += 0.0002;
+  jupiterPivot.rotation.y += 0.00002;
+};
 
+const animate = function () {
+  if(!pause_orbit_global){
+    orbitPlanets();
+  }
+  if(!pause_spin_global){
+    spinPlanets();
+  }
+  requestAnimationFrame(animate);
+  controls.update();
   renderer.render(scene, camera);
 };
 
