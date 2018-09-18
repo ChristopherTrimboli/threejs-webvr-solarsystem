@@ -111,6 +111,14 @@ const starGeometry = new THREE.CubeGeometry(100000, 100000, -100000);
 const starbox = new THREE.Mesh(starGeometry, starMaterial);
 scene.add(starbox);
 
+starbox.rotation.x = THREE.Math.degToRad(63);
+
+starbox.position.set(
+  camera.position.x,
+  camera.position.y,
+  camera.position.z
+);
+
 // Create Sun
 
 const sunTexture = new THREE.TextureLoader().load( './images/sunbumpmap.jpg' );
