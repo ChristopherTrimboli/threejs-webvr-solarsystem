@@ -19,7 +19,7 @@ function onWindowResize() {
 
 // create starbox
 
-const imagePrefix = "images/milky_way-cubemap/";
+const imagePrefix = "images/2kstars/";
 const directions  = ["GalaxyTex_PositiveX", "GalaxyTex_NegativeX", "GalaxyTex_PositiveY",
   "GalaxyTex_NegativeY", "GalaxyTex_PositiveZ", "GalaxyTex_NegativeZ"];
 const imageSuffix = ".png";
