@@ -11,6 +11,15 @@ const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'hig
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
 
+// VR support
+
+if(navigator.getVRDisplays){
+  console.log("VR displays detected");
+  renderer.vr.enabled = true;
+  renderer.vr.userHeight = 0;
+}
+else console.log("No VR displays detected");
+
 // Resize window size on re-size
 
 window.addEventListener("resize", onWindowResize, false);
@@ -21,8 +30,6 @@ function onWindowResize() {
 }
 
 // dat GUI
-
-
 
 window.onload = function() {
 
@@ -246,20 +253,6 @@ controls.minDistance = 1000;
 controls.maxDistance = 50000;
 controls.update();
 camera.position.set(0,1000,5000);
-
-if (navigator.getVRDisplays) {
-  navigator.getVRDisplays()
-    .then(displays => {
-      const presentingDisplay = displays.find(display => display.isPresenting);
-      if (presentingDisplay) {
-        renderer.vr.enabled = true;
-        renderer.vr.setDevice(presentingDisplay);
-      }
-    })
-    .catch(err => {
-      console.warn(err);
-    });
-}
 
 const spinPlanets = function () {
   sun.rotation.y += 0.0001;
