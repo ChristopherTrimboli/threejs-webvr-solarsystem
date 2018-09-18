@@ -275,19 +275,18 @@ const orbitPlanets = function () {
   jupiterPivot.rotation.y += 0.00002;
 };
 
-
-const animate = function () {
+function update() {
   if(!pause_orbit_global){
     orbitPlanets();
   }
   if(!pause_spin_global){
     spinPlanets();
   }
-  requestAnimationFrame(animate);
   if(!navigator.getVRDisplays){
     controls.update();
   }
   renderer.render(scene, camera);
-};
+}
 
-animate();
+renderer.setAnimationLoop(update);
+
