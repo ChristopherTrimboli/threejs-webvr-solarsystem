@@ -28,8 +28,6 @@ else{
   controls.minDistance = 1000;
   controls.maxDistance = 50000;
   controls.update();
-  camera.position.set(0,1000,5000);
-
   window.addEventListener("resize", onWindowResize, false);
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -41,8 +39,6 @@ else{
 // dat GUI
 
 window.onload = function() {
-
-  camera.position.set(0,1000,2000);
 
   const FizzyText = function() {
     this.music = true;
@@ -274,6 +270,45 @@ const orbitPlanets = function () {
   marsPivot.rotation.y += 0.0002;
   jupiterPivot.rotation.y += 0.00002;
 };
+
+dolly = new THREE.Group();
+scene.add(dolly);
+dolly.add(camera);
+
+
+let state = {
+  lastButtons: {},
+  lastAxes: {}
+};
+Array.prototype.forEach.call(navigator.getGamepads(), function (activePad, padIndex) {
+  if (activePad.connected) {
+    if (activePad.id.includes("Gear VR")) {
+      // Process buttons and axes for the Gear VR touch panel
+      activePad.buttons.forEach(function (gamepadButton, buttonIndex) {
+        if (buttonIndex === 0 && gamepadButton.pressed && !lastButtons[buttonIndex]) {
+          // Handle tap
+        }
+        state.lastButtons[buttonIndex] = gamepadButton.pressed;
+      });
+
+      activePad.axes.forEach(function (axisValue, axisIndex) {
+        if (axisIndex === 0 && axisValue < 0 && lastAxes[axisIndex] >= 0) {
+          // Handle swipe right
+          dolly.position.x+=1;
+        } else if (axisIndex === 0 && axisValue > 0 && lastAxes[axisIndex] <= 0) {
+          // Handle swipe left
+        } else if (axisIndex === 1 && axisValue < 0 && lastAxes[axisIndex] >= 0) {
+          // Handle swipe up
+        } else if (axisIndex === 1 && axisValue > 0 && lastAxes[axisIndex] <= 0) {
+          // Handle swipe down
+        }
+        state.lastAxes[axisIndex] = axisValue;
+      });
+    } else {
+      // This is a connected Bluetooth gamepad which you may want to support in your VR experience
+    }
+  }
+});
 
 function update() {
   if(!pause_orbit_global){
