@@ -22,6 +22,7 @@ if(navigator.getVRDisplays){
   document.body.appendChild(
     WEBVR.createButton(renderer, {frameOfReferenceType: "head-model"})
   );
+  camera.position.set(0,1000,2000);
 }
 else{
   console.log("No VR displays detected");
