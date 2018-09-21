@@ -14,6 +14,6 @@ Orbits: currently not to real scale
 Planet Spins: currently not to real scale
 
 ## Demo
-![Solar System Demo](https://cdn.rawgit.com/ChrisEddy/three.js-playground/330a9e36/demo2.gif)
++<img src="/demo.gif?raw=true">
 
 ### Shoutout to Flexo for the help
