@@ -3,15 +3,15 @@ This is a fun project im making that utilizes three.js for the 3D rendering and 
 100% Javascript and runs in Browser. Works perfect with Oculus as GearVR is my dev hardware. 
 
 ## Controls
-Clickpad = fly forward in direction you are looking
-Trigger  = fly backwards from direction you are looking
-More controls on the way...
+- Clickpad = fly forward in direction you are looking
+- Trigger  = fly backwards from direction you are looking
+- More controls on the way...
 
 ## Scale
-Planet Sizes: 1:1000
-Distances: 1:100,000
-Orbits: currently not to real scale
-Planet Spins: currently not to real scale
+- Planet Sizes: 1:1000
+- Distances: 1:100,000
+- Orbits: currently not to real scale
+- Planet Spins: currently not to real scale
 
 ## Demo
 +<img src="/demo.gif?raw=true">
