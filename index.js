@@ -284,7 +284,11 @@ const controllerGeometry = new THREE.SphereGeometry(0.5, 0.5, 0.5);
 const controller = new THREE.Mesh(controllerGeometry, controllerMaterial);
 scene.add(controller);
 
+const clock = new THREE.Clock();
+var delta;
+
 function update() {
+  delta = clock.getDelta();
 
   if(!pause_orbit_global){
     orbitPlanets();
@@ -298,57 +302,39 @@ function update() {
   };
   Array.prototype.forEach.call(navigator.getGamepads(), function (activePad, padIndex) {
     if(activePad) {
-      if(activePad.pose.hasPosition) console.log(activePad.pose.position);
-      if(activePad.id.includes("Gear VR Controller")) {
-        console.log(activePad.pose);
-        controller.position.fromArray(activePad.pose.position);
-        controller.quaternion.fromArray(activePad.pose.orientation);
-        controller.updateMatrixWorld();
-        // Process buttons and axes for the Gear VR touch panel
-        activePad.buttons.forEach(function (gamepadButton, buttonIndex) {
-          if (buttonIndex === 0 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
-            // Handle tap
-            console.log('tap');
-            let clock = new THREE.Clock();
-            let deltaTime = clock.getDelta();
-            const flySpeed = 10;
-            let forwardVector = controller.getWorldDirection(new THREE.Vector3());
-            dolly.translateOnAxis(forwardVector, flySpeed * deltaTime)
-          }
-          if (buttonIndex === 1 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
-            // Handle tap
-            console.log('lmao')
-          }
-          if (buttonIndex === 2 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
-            // Handle tap
-            console.log('lmao')
-          }
-          if (buttonIndex === 3 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
-            // Handle tap
-            console.log('lmao')
-          }
-          state.lastButtons[buttonIndex] = gamepadButton.pressed;
-        });
+      // Process buttons and axes for the Gear VR touch panel
+      activePad.buttons.forEach(function (gamepadButton, buttonIndex) {
+        if (buttonIndex === 0 && gamepadButton.pressed) {
+          // Handle tap
+          console.log('tap');
+          dolly.translateOnAxis(camera.getWorldDirection(new THREE.Vector3()), 600 * delta);
+        }
+        if (buttonIndex === 1 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
+          // Handle tap
+          console.log('lmao1');
+          dolly.translateOnAxis(camera.getWorldDirection(new THREE.Vector3()), -600 * delta);
+        }
+        state.lastButtons[buttonIndex] = gamepadButton.pressed;
+      });
 
-        activePad.axes.forEach(function (axisValue, axisIndex) {
-          if (axisIndex === 0 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
-            // Handle swipe right
-            console.log('right')
-          } else if (axisIndex === 0 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
-            // Handle swipe left
-            console.log('left')
-          } else if (axisIndex === 1 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
-            // Handle swipe up
-            console.log('up')
-          } else if (axisIndex === 1 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
-            // Handle swipe down
-            console.log('down')
-          }
-          state.lastAxes[axisIndex] = axisValue;
-        });
-      } else {
-        // This is a connected Bluetooth gamepad which you may want to support in your VR experience
-      }
+      activePad.axes.forEach(function (axisValue, axisIndex) {
+        if (axisIndex === 0 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
+          // Handle swipe right
+          console.log('right')
+        } else if (axisIndex === 0 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
+          // Handle swipe left
+          console.log('left')
+        } else if (axisIndex === 1 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
+          // Handle swipe up
+          console.log('up')
+        } else if (axisIndex === 1 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
+          // Handle swipe down
+          console.log('down')
+        }
+        state.lastAxes[axisIndex] = axisValue;
+      });
+    } else {
+      // This is a connected Bluetooth gamepad which you may want to support in your VR experience
     }
   });
   if(!navigator.getVRDisplays){
