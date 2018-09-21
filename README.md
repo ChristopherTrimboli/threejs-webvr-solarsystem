@@ -1,4 +1,19 @@
-# three.js-playground
-A repo for me to play and learn three.js
+# Three.js + WebVR Solar System
+This is a fun project im making that utilizes three.js for the 3D rendering and webVR for the VR support.
+100% Javascript and runs in Browser. Works perfect with Oculus as GearVR is my dev hardware. 
 
-![example](https://cdn.rawgit.com/ChrisEddy/three.js-playground/f02a13ee/space.gif)
+## Controls
+Clickpad = fly forward in direction you are looking
+Trigger  = fly backwards from direction you are looking
+More controls on the way...
+
+## Scale
+Planet Sizes: 1:1000
+Distances: 1:100,000
+Orbits: currently not to real scale
+Planet Spins: currently not to real scale
+
+## Demo
+![Solar System Demo](https://cdn.rawgit.com/ChrisEddy/three.js-playground/ba1f1af1/demo.gif)
+
+### Shoutout to Flexo for the help
