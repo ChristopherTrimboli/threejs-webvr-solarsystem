@@ -56,10 +56,10 @@ window.onload = function() {
 
   musicController.onChange(function(value) {
     if(value){
-      // backgroundMusic.play();
+      backgroundMusic.play();
     }
     else{
-      // backgroundMusic.pause();
+      backgroundMusic.pause();
     }
   });
 
@@ -83,49 +83,49 @@ window.onload = function() {
 
 };
 
-// // Music
-//
-// // instantiate a listener
-// const audioListener = new THREE.AudioListener();
-//
-// // add the listener to the camera
-// camera.add(audioListener);
-//
-// // instantiate audio object
-// const backgroundMusic = new THREE.Audio(audioListener);
-//
-// // add the audio object to the scene
-// scene.add(backgroundMusic);
-//
-// // instantiate a loader
-// const loader = new THREE.AudioLoader();
-//
-// // load a resource
-// loader.load(
-//   // resource URL
-//   'Resonance.mp3',
-//
-//   // onLoad callback
-//   function ( audioBuffer ) {
-//     // set the audio object buffer to the loaded object
-//     backgroundMusic.setBuffer( audioBuffer );
-//     backgroundMusic.setLoop( true );
-//     backgroundMusic.setVolume( 0.5 );
-//     // play the audio
-//     backgroundMusic.play();
-//   },
-//
-//   // onProgress callback
-//   function ( xhr ) {
-//     console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-//   },
-//
-//   // onError callback
-//   function ( err ) {
-//     console.log( 'An error happened' );
-//     console(err.stack)
-//   }
-// );
+// Music
+
+// instantiate a listener
+const audioListener = new THREE.AudioListener();
+
+// add the listener to the camera
+camera.add(audioListener);
+
+// instantiate audio object
+const backgroundMusic = new THREE.Audio(audioListener);
+
+// add the audio object to the scene
+scene.add(backgroundMusic);
+
+// instantiate a loader
+const loader = new THREE.AudioLoader();
+
+// load a resource
+loader.load(
+  // resource URL
+  'Resonance.mp3',
+
+  // onLoad callback
+  function ( audioBuffer ) {
+    // set the audio object buffer to the loaded object
+    backgroundMusic.setBuffer( audioBuffer );
+    backgroundMusic.setLoop( true );
+    backgroundMusic.setVolume( 0.5 );
+    // play the audio
+    backgroundMusic.play();
+  },
+
+  // onProgress callback
+  function ( xhr ) {
+    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+  },
+
+  // onError callback
+  function ( err ) {
+    console.log( 'An error happened' );
+    console(err.stack)
+  }
+);
 
 // create starbox
 
@@ -275,10 +275,6 @@ dolly = new THREE.Group();
 scene.add(dolly);
 dolly.add(camera);
 
-function forward() {
-  return (new THREE.Vector3(0, 0, -1)).applyQuaternion(this.object3d.quaternion);
-}
-
 const controllerMaterial = new THREE.MeshBasicMaterial( { color: 'red' } );
 const controllerGeometry = new THREE.SphereGeometry(0.5, 0.5, 0.5);
 const controller = new THREE.Mesh(controllerGeometry, controllerMaterial);
@@ -310,7 +306,7 @@ function update() {
           dolly.translateOnAxis(camera.getWorldDirection(new THREE.Vector3()), 600 * delta);
         }
         if (buttonIndex === 1 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
-          // Handle tap
+          // Handle trigger
           console.log('lmao1');
           dolly.translateOnAxis(camera.getWorldDirection(new THREE.Vector3()), -600 * delta);
         }
