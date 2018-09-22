@@ -319,8 +319,8 @@ function update() {
     var min = Infinity;
     for(let body of systemBodies) {
       var bodyWorldPos = body.getWorldPosition(new THREE.Vector3());
-      var cameraWorldPos = camera.getWorldPosition(new THREE.Vector3());
-      var distance = bodyWorldPos.distanceTo(cameraWorldPos);
+      var objectWorldPos = object.getWorldPosition(new THREE.Vector3());
+      var distance = bodyWorldPos.distanceTo(objectWorldPos);
       if(distance < min) min = distance;
     }
     return min;
