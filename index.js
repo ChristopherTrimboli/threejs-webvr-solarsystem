@@ -187,7 +187,7 @@ light.shadow.camera.far = 10000;      // default
 // create mercury
 
 const mercuryTexture = new THREE.TextureLoader().load( './images/mercurybumpmap.jpg' );
-const mercuryMaterial = new THREE.MeshStandardMaterial( { map: mercuryTexture } );
+const mercuryMaterial = new THREE.MeshStandardMaterial( { map: mercuryTexture, metalness: 0.0, roughness: 1.0 } );
 
 const mercuryGeometry = new THREE.SphereGeometry(1, 100, 100);
 const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
@@ -202,13 +202,16 @@ mercuryPivot.add(mercury);
 
 // Create Earth
 
+var earthRoughTex = new THREE.TextureLoader().load("earthRough.png");
 const earthTexture = new THREE.TextureLoader().load( './images/earthbumpmap.jpg' );
 const earthMaterial = new THREE.MeshStandardMaterial( { map: earthTexture } );
+earthMaterial.roughnessMap = earthRoughTex;
 
 const earthGeometry = new THREE.SphereGeometry(12.7, 100, 100);
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 earth.position.x = 1496;
 earth.castShadow = earth.receiveShadow = true;
+earth.material.metalness = 0.1;
 scene.add(earth);
 // Orbit Earth around the sun
 
@@ -219,7 +222,7 @@ earthPivot.add(earth);
 // Create the Moon
 
 const moonTexture = new THREE.TextureLoader().load( './images/moonbumpmap.jpg' );
-const moonMaterial = new THREE.MeshStandardMaterial( { map: moonTexture } );
+const moonMaterial = new THREE.MeshStandardMaterial( { map: moonTexture, metalness: 0.0, roughness: 1.0 } );
 
 const moonGeometry = new THREE.SphereGeometry(3.5, 100, 100);
 const moon = new THREE.Mesh(moonGeometry, moonMaterial);
@@ -236,7 +239,7 @@ moonPivot.add(moon);
 // Create mars
 
 const marsTexture = new THREE.TextureLoader().load( './images/marsbumpmap.jpg' );
-const marsMaterial = new THREE.MeshStandardMaterial( { map: marsTexture } );
+const marsMaterial = new THREE.MeshStandardMaterial( { map: marsTexture, metalness: 0.0, roughness: 1.0 } );
 
 const marsGeometry = new THREE.SphereGeometry(6.8, 100, 100);
 const mars = new THREE.Mesh(marsGeometry, marsMaterial);
@@ -252,7 +255,7 @@ marsPivot.add(mars);
 // Create jupiter
 
 const jupiterTexture = new THREE.TextureLoader().load( './images/jupiterbumpmap.jpg' );
-const jupiterMaterial = new THREE.MeshStandardMaterial( { map: jupiterTexture } );
+const jupiterMaterial = new THREE.MeshStandardMaterial( { map: jupiterTexture, metalness: 0.0, roughness: 1.0 } );
 
 const jupiterGeometry = new THREE.SphereGeometry(139.8, 20, 20);
 const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
