@@ -155,6 +155,8 @@ starbox.position.set(
   camera.position.z
 );
 
+var systemBodies = new THREE.Group();
+scene.add(systemBodies);
 // create center point that isnt tied to the sun, because orbit mechanics
 
 const centerMaterial = new THREE.MeshBasicMaterial( { color: 'black' } );
@@ -170,7 +172,7 @@ const sunMaterial = new THREE.MeshBasicMaterial( { map: sunTexture } );
 
 const sunGeometry = new THREE.SphereGeometry(695, 100, 100);
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
-scene.add(sun);
+systemBodies.add(sun);
 
 // Add pointlight to sun
 
@@ -192,7 +194,7 @@ const mercuryMaterial = new THREE.MeshStandardMaterial( { map: mercuryTexture, m
 const mercuryGeometry = new THREE.SphereGeometry(1, 100, 100);
 const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
 mercury.castShadow = mercury.receiveShadow = true;
-scene.add(mercury);
+systemBodies.add(mercury);
 mercury.position.x = 927;
 
 // Orbit mercury around the sun
@@ -212,7 +214,7 @@ const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 earth.position.x = 1496;
 earth.castShadow = earth.receiveShadow = true;
 earth.material.metalness = 0.1;
-scene.add(earth);
+systemBodies.add(earth);
 // Orbit Earth around the sun
 
 const earthPivot = new THREE.Object3D();
@@ -244,7 +246,7 @@ const marsMaterial = new THREE.MeshStandardMaterial( { map: marsTexture, metalne
 const marsGeometry = new THREE.SphereGeometry(6.8, 100, 100);
 const mars = new THREE.Mesh(marsGeometry, marsMaterial);
 mars.castShadow = mars.receiveShadow = true;
-scene.add(mars);
+systemBodies.add(mars);
 mars.position.x = 2627;
 
 // Orbit mars around the sun
@@ -260,7 +262,7 @@ const jupiterMaterial = new THREE.MeshStandardMaterial( { map: jupiterTexture, m
 const jupiterGeometry = new THREE.SphereGeometry(139.8, 20, 20);
 const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
 jupiter.castShadow = jupiter.receiveShadow = true;
-scene.add(jupiter);
+systemBodies.add(jupiter);
 jupiter.position.x = 8133;
 
 // Orbit Jupiter around the sun
@@ -312,21 +314,34 @@ function update() {
     lastButtons: {},
     lastAxes: {}
   };
+  
+  function getClosestBodyDistance(object) {
+    var min = Infinity;
+    for(let body of systemBodies) {
+      var bodyWorldPos = body.getWorldPosition(new THREE.Vector3());
+      var cameraWorldPos = camera.getWorldPosition(new THREE.Vector3());
+      var distance = bodyWorldPos.distanceTo(cameraWorldPos);
+      if(distance < min) min = distance;
+    }
+    return min;
+  }
+  
   Array.prototype.forEach.call(navigator.getGamepads(), function (activePad, padIndex) {
     if(activePad) {
       // Process buttons and axes for the Gear VR touch panel
       activePad.buttons.forEach(function (gamepadButton, buttonIndex) {
         var cameraForward = camera.getWorldDirection(new THREE.Vector3());
         var cameraSpeed = 0;
+        var closestBodyDistance = getClosestBodyDistance(camera);
         if (buttonIndex === 0 && gamepadButton.pressed) {
           // Handle tap
           console.log('tap');
-          cameraSpeed = 600;
+          cameraSpeed = closestBodyDistance * delta;
         }
         if (buttonIndex === 1 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
           // Handle trigger
           console.log('lmao1');
-          cameraSpeed = -600;
+          cameraSpeed = -cameraSpeed = closestBodyDistance * delta;
         }
         dolly.translateOnAxis(cameraForward, cameraSpeed * delta);
         state.lastButtons[buttonIndex] = gamepadButton.pressed;
