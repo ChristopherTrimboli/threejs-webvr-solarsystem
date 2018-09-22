@@ -9,13 +9,38 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHei
 
 const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
 
-// const stats = new Stats();
-// stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
-// document.body.appendChild( stats.dom );
+
+// three.js render stats
+const rendererStats	= new THREEx.RendererStats();
+rendererStats.domElement.style.position	= 'absolute';
+rendererStats.domElement.style.left	= '0px';
+rendererStats.domElement.style.bottom	= '0px';
+document.body.appendChild( rendererStats.domElement );
+
+// FPS stats
+const stats = new Stats();
+stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
+
+//RAM stats
+const statsRAM = new Stats();
+statsRAM.showPanel(2); // 0: fps, 1: ms, 2: mb, 3+: custom
+statsRAM.domElement.style.position	= 'absolute';
+statsRAM.domElement.style.left	= '0px';
+statsRAM.domElement.style.top	= '50px';
+document.body.appendChild( statsRAM.dom );
+
+//Miliseconds to render frame stats
+const statsMili = new Stats();
+statsMili.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+statsMili.domElement.style.position	= 'absolute';
+statsMili.domElement.style.left	= '0px';
+statsMili.domElement.style.top	= '100px';
+document.body.appendChild( statsMili.dom );
 
 const controls = new THREE.OrbitControls( camera );
 
@@ -305,6 +330,9 @@ const clock = new THREE.Clock();
 var delta;
 
 function update() {
+  stats.begin();
+  statsMili.begin();
+  statsRAM.begin();
   delta = clock.getDelta();
 
   if(!pause_orbit_global){
@@ -360,7 +388,11 @@ function update() {
   if(!navigator.getVRDisplays){
     controls.update();
   }
+  rendererStats.update(renderer);
   renderer.render(scene, camera);
+  statsRAM.end();
+  statsMili.end();
+  stats.end();
 }
 
 renderer.setAnimationLoop(update);
