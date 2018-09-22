@@ -313,16 +313,19 @@ function update() {
     if(activePad) {
       // Process buttons and axes for the Gear VR touch panel
       activePad.buttons.forEach(function (gamepadButton, buttonIndex) {
+        var cameraForward = camera.getWorldDirection(new THREE.Vector3());
+        var cameraSpeed = 0;
         if (buttonIndex === 0 && gamepadButton.pressed) {
           // Handle tap
           console.log('tap');
-          dolly.translateOnAxis(camera.getWorldDirection(new THREE.Vector3()), 600 * delta);
+          cameraSpeed = 600;
         }
         if (buttonIndex === 1 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
           // Handle trigger
           console.log('lmao1');
-          dolly.translateOnAxis(camera.getWorldDirection(new THREE.Vector3()), -600 * delta);
+          cameraSpeed = -600;
         }
+        dolly.translateOnAxis(cameraForward, cameraSpeed * delta);
         state.lastButtons[buttonIndex] = gamepadButton.pressed;
       });
 
