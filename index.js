@@ -72,7 +72,7 @@ else{
 window.onload = function() {
 
   const FizzyText = function() {
-    this.music = true;
+    this.music = false;
     this.pause_orbit = false;
     this.pause_spin = false;
   };
@@ -81,7 +81,7 @@ window.onload = function() {
 
   const text = new FizzyText();
 
-  const musicController = gui.add(text, 'music', true);
+  const musicController = gui.add(text, 'music', false);
   const pause_orbitController = gui.add(text, 'pause_orbit', false);
   const pause_spinController = gui.add(text, 'pause_spin', false);
 
@@ -143,7 +143,7 @@ loader.load(
     backgroundMusic.setLoop( true );
     backgroundMusic.setVolume( 0.5 );
     // play the audio
-    backgroundMusic.play();
+    // backgroundMusic.play();
   },
 
   // onProgress callback
