@@ -202,7 +202,7 @@ mercuryPivot.add(mercury);
 
 // Create Earth
 
-var earthRoughTex = new THREE.TextureLoader().load("earthRough.png");
+var earthRoughTex = new THREE.TextureLoader().load("./images/earth-rough.png");
 const earthTexture = new THREE.TextureLoader().load( './images/earthbumpmap.jpg' );
 const earthMaterial = new THREE.MeshStandardMaterial( { map: earthTexture } );
 earthMaterial.roughnessMap = earthRoughTex;
