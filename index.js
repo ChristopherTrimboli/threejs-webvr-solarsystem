@@ -9,9 +9,13 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHei
 
 const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
+
+// const stats = new Stats();
+// stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+// document.body.appendChild( stats.dom );
 
 const controls = new THREE.OrbitControls( camera );
 
@@ -179,8 +183,8 @@ light.position.set( 10, 10, 10 );
 light.castShadow = true;
 scene.add( light );
 
-light.shadow.mapSize.width = 1024;
-light.shadow.mapSize.height = 1024;
+light.shadow.mapSize.width = 2048;
+light.shadow.mapSize.height = 2048;
 light.shadow.camera.near = 0.5;
 light.shadow.camera.far = 50000;
 
@@ -189,7 +193,7 @@ light.shadow.camera.far = 50000;
 const mercuryTexture = new THREE.TextureLoader().load( './images/4k_mercury.jpg' );
 const mercuryMaterial = new THREE.MeshStandardMaterial( { map: mercuryTexture, metalness: 0.0, roughness: 1.0 } );
 
-const mercuryGeometry = new THREE.SphereGeometry(1, 100, 100);
+const mercuryGeometry = new THREE.SphereGeometry(10, 100, 100);
 const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
 mercury.castShadow = mercury.receiveShadow = true;
 scene.add(mercury);
@@ -205,9 +209,10 @@ mercuryPivot.add(mercury);
 var earthRoughTex = new THREE.TextureLoader().load("./images/earth-rough.png");
 const earthTexture = new THREE.TextureLoader().load( './images/earthbumpmap.jpg' );
 const earthMaterial = new THREE.MeshStandardMaterial( { map: earthTexture } );
+
 earthMaterial.roughnessMap = earthRoughTex;
 
-const earthGeometry = new THREE.SphereGeometry(12.7, 100, 100);
+const earthGeometry = new THREE.SphereGeometry(127, 500, 500);
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 earth.position.x = 1496;
 earth.castShadow = earth.receiveShadow = true;
@@ -224,11 +229,11 @@ earthPivot.add(earth);
 const moonTexture = new THREE.TextureLoader().load( './images/4k_moon.jpg' );
 const moonMaterial = new THREE.MeshStandardMaterial( { map: moonTexture, metalness: 0.0, roughness: 1.0 } );
 
-const moonGeometry = new THREE.SphereGeometry(3.5, 100, 100);
+const moonGeometry = new THREE.SphereGeometry(35, 100, 100);
 const moon = new THREE.Mesh(moonGeometry, moonMaterial);
 moon.castShadow = moon.receiveShadow = true;
 scene.add(moon);
-moon.position.x = 20;
+moon.position.x = 200;
 
 // Orbit moon around earth
 
@@ -241,7 +246,7 @@ moonPivot.add(moon);
 const marsTexture = new THREE.TextureLoader().load( './images/4k_mars.jpg' );
 const marsMaterial = new THREE.MeshStandardMaterial( { map: marsTexture, metalness: 0.0, roughness: 1.0 } );
 
-const marsGeometry = new THREE.SphereGeometry(6.8, 100, 100);
+const marsGeometry = new THREE.SphereGeometry(68, 100, 100);
 const mars = new THREE.Mesh(marsGeometry, marsMaterial);
 mars.castShadow = mars.receiveShadow = true;
 scene.add(mars);
@@ -257,7 +262,7 @@ marsPivot.add(mars);
 const jupiterTexture = new THREE.TextureLoader().load( './images/4k_jupiter.jpg' );
 const jupiterMaterial = new THREE.MeshStandardMaterial( { map: jupiterTexture, metalness: 0.0, roughness: 1.0 } );
 
-const jupiterGeometry = new THREE.SphereGeometry(139.8, 20, 20);
+const jupiterGeometry = new THREE.SphereGeometry(1398, 20, 20);
 const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
 jupiter.castShadow = jupiter.receiveShadow = true;
 scene.add(jupiter);
