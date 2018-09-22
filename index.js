@@ -165,7 +165,7 @@ center.position.set(0,0,0);
 
 // Create Sun
 
-const sunTexture = new THREE.TextureLoader().load( './images/sunbumpmap.jpg' );
+const sunTexture = new THREE.TextureLoader().load( './images/4k_sun.jpg' );
 const sunMaterial = new THREE.MeshBasicMaterial( { map: sunTexture } );
 
 const sunGeometry = new THREE.SphereGeometry(695, 100, 100);
@@ -179,14 +179,14 @@ light.position.set( 10, 10, 10 );
 light.castShadow = true;
 scene.add( light );
 
-light.shadow.mapSize.width = 10000;  // default
-light.shadow.mapSize.height = 10000; // default
-light.shadow.camera.near = 0.5;       // default
-light.shadow.camera.far = 10000;      // default
+light.shadow.mapSize.width = 1024;
+light.shadow.mapSize.height = 1024;
+light.shadow.camera.near = 0.5;
+light.shadow.camera.far = 50000;
 
 // create mercury
 
-const mercuryTexture = new THREE.TextureLoader().load( './images/mercurybumpmap.jpg' );
+const mercuryTexture = new THREE.TextureLoader().load( './images/4k_mercury.jpg' );
 const mercuryMaterial = new THREE.MeshStandardMaterial( { map: mercuryTexture, metalness: 0.0, roughness: 1.0 } );
 
 const mercuryGeometry = new THREE.SphereGeometry(1, 100, 100);
@@ -221,7 +221,7 @@ earthPivot.add(earth);
 
 // Create the Moon
 
-const moonTexture = new THREE.TextureLoader().load( './images/moonbumpmap.jpg' );
+const moonTexture = new THREE.TextureLoader().load( './images/4k_moon.jpg' );
 const moonMaterial = new THREE.MeshStandardMaterial( { map: moonTexture, metalness: 0.0, roughness: 1.0 } );
 
 const moonGeometry = new THREE.SphereGeometry(3.5, 100, 100);
@@ -238,7 +238,7 @@ moonPivot.add(moon);
 
 // Create mars
 
-const marsTexture = new THREE.TextureLoader().load( './images/marsbumpmap.jpg' );
+const marsTexture = new THREE.TextureLoader().load( './images/4k_mars.jpg' );
 const marsMaterial = new THREE.MeshStandardMaterial( { map: marsTexture, metalness: 0.0, roughness: 1.0 } );
 
 const marsGeometry = new THREE.SphereGeometry(6.8, 100, 100);
@@ -254,7 +254,7 @@ marsPivot.add(mars);
 
 // Create jupiter
 
-const jupiterTexture = new THREE.TextureLoader().load( './images/jupiterbumpmap.jpg' );
+const jupiterTexture = new THREE.TextureLoader().load( './images/4k_jupiter.jpg' );
 const jupiterMaterial = new THREE.MeshStandardMaterial( { map: jupiterTexture, metalness: 0.0, roughness: 1.0 } );
 
 const jupiterGeometry = new THREE.SphereGeometry(139.8, 20, 20);
