@@ -89,7 +89,6 @@ window.onload = function() {
     this.toggle_stats = false;
     this.toggle_orbit_lines = true;
     this.boostValue = boost;
-
   };
 
   const gui = new dat.GUI();
@@ -101,7 +100,7 @@ window.onload = function() {
   const pause_spinController = gui.add(text, 'pause_spin', false);
   const toggle_orbit_lines = gui.add(text, 'toggle_orbit_lines', true);
   const toggle_stats = gui.add(text, 'toggle_stats', false);
-  const boostValue = gui.add(text, 'boostValue', 0, 2000);
+  const boostValue = gui.add(text, 'boostValue', 0, 2000).listen();
 
 
   musicController.onChange(function(value) {
