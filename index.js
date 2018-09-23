@@ -324,9 +324,6 @@ camera.position.x = -1000;
 camera.position.z = -2000;
 camera.position.y = 2000;
 
-dolly.position.x = -1000;
-dolly.position.z = -2000;
-dolly.position.y = 2000;
 
 const controllerMaterial = new THREE.MeshBasicMaterial( { color: 'red' } );
 const controllerGeometry = new THREE.SphereGeometry(0.5, 0.5, 0.5);
