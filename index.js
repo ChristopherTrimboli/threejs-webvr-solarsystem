@@ -576,22 +576,28 @@ function update() {
       });
 
       activePad.axes.forEach(function (axisValue, axisIndex) {
+        activePad.buttons.forEach(function (gamepadButton){
         if (axisIndex === 0 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
           // Handle swipe right
           console.log('right')
         } else if (axisIndex === 0 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
           // Handle swipe left
           console.log('left')
-        } else if (axisIndex === 1 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
+        } else if (axisIndex === 1 && axisValue < 0 && state.lastAxes[axisIndex] >= 0 && !gamepadButton.pressed) {
           // Handle swipe up
           console.log('up');
-          boost += 10;
-        } else if (axisIndex === 1 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
+          if(boost >= 0){
+            boost += 10;
+          }
+        } else if (axisIndex === 1 && axisValue > 0 && state.lastAxes[axisIndex] <= 0 && !gamepadButton.pressed) {
           // Handle swipe down
           console.log('down');
-          boost -= 10;
+          if(boost >= 0){
+            boost -= 10;
+          }
         }
         state.lastAxes[axisIndex] = axisValue;
+      });
       });
     } else {
       // This is a connected Bluetooth gamepad which you may want to support in your VR experience
