@@ -7,6 +7,14 @@ let pause_orbit_global = false;
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 150000);
 
+const dolly = new THREE.Group();
+scene.add(dolly);
+dolly.add(camera);
+
+camera.position.x = -1000;
+camera.position.z = -2000;
+camera.position.y = 2000;
+
 const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -52,6 +60,9 @@ if(navigator.getVRDisplays){
   document.body.appendChild(
     WEBVR.createButton(renderer, {frameOfReferenceType: "head-model"})
   );
+  dolly.position.x = -1000;
+  dolly.position.z = -2000;
+  dolly.position.y = 2000;
 }
 else{
   console.log("No VR displays detected");
@@ -315,14 +326,6 @@ const orbitPlanets = function () {
   marsPivot.rotation.y += 0.0002;
   jupiterPivot.rotation.y += 0.00002;
 };
-
-dolly = new THREE.Group();
-scene.add(dolly);
-dolly.add(camera);
-
-camera.position.x = -1000;
-camera.position.z = -2000;
-camera.position.y = 2000;
 
 
 const controllerMaterial = new THREE.MeshBasicMaterial( { color: 'red' } );
