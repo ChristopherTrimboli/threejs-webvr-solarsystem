@@ -391,6 +391,34 @@ scene.add( jupiterOrbit );
 jupiterOrbit.rotation.x = THREE.Math.degToRad(90);
 
 
+// Add text to jupiter
+var textloader = new THREE.FontLoader();
+
+var textGeometry;
+var textMesh;
+
+textloader.load( 'helvetiker_regular.typeface.json', function ( font ) {
+  textGeometry = new THREE.TextGeometry( 'Jupiter - The Red Giant', {
+    font: font,
+    size: 100,
+    height: 5,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 10,
+    bevelSize: 8,
+    bevelSegments: 5
+  } );
+  var textMaterials = [
+    new THREE.MeshBasicMaterial({color: 0xffffff, overdraw: 0.5}),
+    new THREE.MeshBasicMaterial({color: 0xffffff * 0.5, overdraw: 0.5})
+  ];
+  textMesh = new THREE.Mesh(textGeometry, textMaterials);
+  textGeometry.computeBoundingBox();
+  var centerOffset = -0.5 * (textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x);
+  jupiter.add(textMesh);
+  textMesh.position.set(centerOffset, 1398 + 200, 0);
+} );
+
 // create saturn
 
 const saturnTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_saturn.jpg' );
@@ -610,6 +638,12 @@ function update() {
   });
   if(!navigator.getVRDisplays){
     controls.update();
+  }
+  try{
+    textMesh.lookAt(camera.getWorldPosition(new THREE.Vector3()));
+  }
+  catch(e){
+    console.log(e.stack);
   }
   rendererStats.update(renderer);
   renderer.render(scene, camera);
