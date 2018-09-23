@@ -219,7 +219,7 @@ scene.add( light );
 light.shadow.mapSize.width = 2048;
 light.shadow.mapSize.height = 2048;
 light.shadow.camera.near = 0.5;
-light.shadow.camera.far = 50000;
+light.shadow.camera.far = 80000;
 
 // create mercury
 
@@ -386,7 +386,7 @@ const spinPlanets = function () {
 };
 
 const orbitPlanets = function () {
-  mercuryPivot.rotation.y += 0.0001;
+  mercuryPivot.rotation.y += 0.0003;
   venusPivot.rotation.y -= 0.0001;
   earthPivot.rotation.y += 0.00015;
   moonPivot.rotation.y += 0.003;
@@ -394,7 +394,7 @@ const orbitPlanets = function () {
   jupiterPivot.rotation.y += 0.0001;
   saturnPivot.rotation.y -= 0.0003;
   uranusPivot.rotation.y += 0.0002;
-  neptunePivot.rotation.y -= 0.0002;
+  neptunePivot.rotation.y -= 0.0004;
 };
 
 
