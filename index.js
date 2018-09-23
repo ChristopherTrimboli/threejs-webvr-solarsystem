@@ -63,7 +63,7 @@ if(navigator.getVRDisplays){
   dolly.position.x = -1000;
   dolly.position.z = -2000;
   dolly.position.y = 2000;
-  dolly.rotation.x = THREE.Math.degToRad(125);
+  dolly.rotation.y = THREE.Math.degToRad(125);
 
 }
 else{
