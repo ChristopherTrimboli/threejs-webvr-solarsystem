@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126253984-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-126253984-1');
+  </script>
   <meta charset=utf-8>
+  <meta name="description" content="Three.js + webVR solar system. Just a fun thing to fly around in.">
+  <meta name="keywords" content="VR, Three.js, Solar System, 3D, Space, Webgl, Oculus, GearVR, Javascript">
+  <meta name="author" content="Chris Eddy">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Threejs+WebVR Solar System</title>
   <style>
     body { margin: 0; }
     canvas { width: 100%; height: 100% }
   </style>
   <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="shortcut icon" type="image/png" href="solar-system.png"/>
+  <link rel="apple-touch-icon" href="solar-system.png" />
 </head>
 <body>
   <!-- Three.js, Other Third-party -->
@@ -16,6 +31,8 @@
   <script type="text/javascript" src="WebVR.js"></script>
   <script type="text/javascript" src="orbitControls.js"></script>
   <script type="text/javascript" src="dat.gui.min.js"></script>
+  <script type="text/javascript" src='stats.min.js'></script>
+  <script type="text/javascript" src='threex.rendererstats.js'></script>
   <!-- Gamepad Utility -->
   <script src = "js/input/GamepadUtility.js"></script>
   <!-- Main -->
