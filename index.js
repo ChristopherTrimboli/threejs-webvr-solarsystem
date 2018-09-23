@@ -3,6 +3,8 @@
 
 let pause_spin_global = false;
 let pause_orbit_global = false;
+let toggle_stats_global = false;
+let toggle_orbit_lines_global = true;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 150000);
@@ -83,6 +85,8 @@ window.onload = function() {
     this.music = false;
     this.pause_orbit = false;
     this.pause_spin = false;
+    this.toggle_stats = false;
+    this.toggle_orbit_lines = true;
   };
 
   const gui = new dat.GUI();
@@ -92,6 +96,9 @@ window.onload = function() {
   const musicController = gui.add(text, 'music', false);
   const pause_orbitController = gui.add(text, 'pause_orbit', false);
   const pause_spinController = gui.add(text, 'pause_spin', false);
+  const toggle_orbit_lines = gui.add(text, 'toggle_orbit_lines', true);
+  const toggle_stats = gui.add(text, 'toggle_stats', false);
+
 
   musicController.onChange(function(value) {
     if(value){
@@ -119,6 +126,25 @@ window.onload = function() {
       pause_spin_global = false;
     }
   });
+
+  toggle_stats.onChange(function(value) {
+    if(value){
+      toggle_stats_global = true;
+    }
+    else{
+      toggle_stats_global = false;
+    }
+  });
+
+  toggle_orbit_lines.onChange(function(value) {
+    if(value){
+      toggle_orbit_lines_global = true;
+    }
+    else{
+      toggle_orbit_lines_global = false;
+    }
+  });
+
 
 };
 
@@ -454,6 +480,42 @@ const orbitPlanets = function () {
   neptunePivot.rotation.y -= 0.0004;
 };
 
+const showOrbitLines = function () {
+  mercuryOrbit.visible = true;
+  venusOrbit.visible = true;
+  earthOrbit.visible = true;
+  marsOrbit.visible = true;
+  jupiterOrbit.visible = true;
+  saturnOrbit.visible = true;
+  uranusOrbit.visible = true;
+  neptuneOrbit.visible = true;
+};
+
+const hideOrbitLines = function () {
+  mercuryOrbit.visible = false;
+  venusOrbit.visible = false;
+  earthOrbit.visible = false;
+  marsOrbit.visible = false;
+  jupiterOrbit.visible = false;
+  saturnOrbit.visible = false;
+  uranusOrbit.visible = false;
+  neptuneOrbit.visible = false;
+};
+
+const showStats = function () {
+  stats.dom.hidden = false;
+  statsRAM.dom.hidden = false;
+  statsMili.dom.hidden = false;
+  rendererStats.domElement.hidden = false;
+};
+
+const hideStats = function () {
+  stats.dom.hidden = true;
+  statsRAM.dom.hidden = true;
+  statsMili.dom.hidden = true;
+  rendererStats.domElement.hidden = true;
+};
+
 
 const controllerMaterial = new THREE.MeshBasicMaterial( { color: 'red' } );
 const controllerGeometry = new THREE.SphereGeometry(0.5, 0.5, 0.5);
@@ -469,6 +531,19 @@ function update() {
   statsRAM.begin();
   delta = clock.getDelta();
 
+  if(!toggle_stats_global){
+    hideStats();
+  }
+  else{
+    showStats();
+  }
+
+  if(!toggle_orbit_lines_global){
+    hideOrbitLines();
+  }
+  else{
+    showOrbitLines();
+  }
   if(!pause_orbit_global){
     orbitPlanets();
   }
