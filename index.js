@@ -9,7 +9,7 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHei
 
 const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
 
@@ -320,9 +320,9 @@ const orbitPlanets = function () {
 dolly = new THREE.Group();
 scene.add(dolly);
 dolly.add(camera);
-dolly.position.x = 200;
-dolly.position.y = 200;
-dolly.rotate(90);
+camera.position.x = -1000;
+camera.position.z = -2000;
+camera.position.y = 2000;
 
 const controllerMaterial = new THREE.MeshBasicMaterial( { color: 'red' } );
 const controllerGeometry = new THREE.SphereGeometry(0.5, 0.5, 0.5);
