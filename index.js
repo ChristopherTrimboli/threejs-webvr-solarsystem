@@ -525,6 +525,7 @@ scene.add(controller);
 const clock = new THREE.Clock();
 var delta;
 var cameraSpeed = 0;
+var boost = 0;
 
 function update() {
   stats.begin();
@@ -563,12 +564,12 @@ function update() {
         if (buttonIndex === 0 && gamepadButton.pressed) {
           // Handle tap
           console.log('tap');
-          cameraSpeed = 600;
+          cameraSpeed = 600 + boost;
         }
         if (buttonIndex === 1 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
           // Handle trigger
           console.log('lmao1');
-          cameraSpeed = -600;
+          cameraSpeed = -600 + (-boost);
         }
         dolly.translateOnAxis(cameraForward, cameraSpeed * delta);
         state.lastButtons[buttonIndex] = gamepadButton.pressed;
@@ -584,11 +585,11 @@ function update() {
         } else if (axisIndex === 1 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
           // Handle swipe up
           console.log('up');
-          cameraSpeed += 10;
+          boost += 10;
         } else if (axisIndex === 1 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
           // Handle swipe down
           console.log('down');
-          cameraSpeed -= 10;
+          boost -= 10;
         }
         state.lastAxes[axisIndex] = axisValue;
       });
