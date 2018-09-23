@@ -524,6 +524,7 @@ scene.add(controller);
 
 const clock = new THREE.Clock();
 var delta;
+var cameraSpeed = 0;
 
 function update() {
   stats.begin();
@@ -537,7 +538,6 @@ function update() {
   else{
     showStats();
   }
-
   if(!toggle_orbit_lines_global){
     hideOrbitLines();
   }
@@ -559,7 +559,6 @@ function update() {
       // Process buttons and axes for the Gear VR touch panel
       activePad.buttons.forEach(function (gamepadButton, buttonIndex) {
         var cameraForward = camera.getWorldDirection(new THREE.Vector3());
-        var cameraSpeed = 0;
         if (buttonIndex === 0 && gamepadButton.pressed) {
           // Handle tap
           console.log('tap');
@@ -583,10 +582,12 @@ function update() {
           console.log('left')
         } else if (axisIndex === 1 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
           // Handle swipe up
-          console.log('up')
+          console.log('up');
+          cameraSpeed += 10;
         } else if (axisIndex === 1 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
           // Handle swipe down
-          console.log('down')
+          console.log('down');
+          cameraSpeed -= 10;
         }
         state.lastAxes[axisIndex] = axisValue;
       });
