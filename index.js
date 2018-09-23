@@ -5,6 +5,7 @@ let pause_spin_global = false;
 let pause_orbit_global = false;
 let toggle_stats_global = false;
 let toggle_orbit_lines_global = true;
+var boost = 0;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 150000);
@@ -87,6 +88,8 @@ window.onload = function() {
     this.pause_spin = false;
     this.toggle_stats = false;
     this.toggle_orbit_lines = true;
+    this.boostValue = boost;
+
   };
 
   const gui = new dat.GUI();
@@ -98,6 +101,7 @@ window.onload = function() {
   const pause_spinController = gui.add(text, 'pause_spin', false);
   const toggle_orbit_lines = gui.add(text, 'toggle_orbit_lines', true);
   const toggle_stats = gui.add(text, 'toggle_stats', false);
+  const boostValue = gui.add(text, 'boostValue', 0, 2000);
 
 
   musicController.onChange(function(value) {
@@ -145,6 +149,9 @@ window.onload = function() {
     }
   });
 
+  boostValue.onChange(function(value) {
+    boost = value;
+  });
 
 };
 
@@ -525,7 +532,6 @@ scene.add(controller);
 const clock = new THREE.Clock();
 var delta;
 var cameraSpeed = 0;
-var boost = 0;
 
 function update() {
   stats.begin();
