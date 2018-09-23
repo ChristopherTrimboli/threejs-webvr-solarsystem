@@ -63,7 +63,7 @@ if(navigator.getVRDisplays){
   dolly.position.x = -1000;
   dolly.position.z = -2000;
   dolly.position.y = 2000;
-  dolly.rotation.y = THREE.Math.degToRad(125);
+  scene.rotation.y = THREE.Math.degToRad(100);
 }
 else{
   console.log("No VR displays detected");
@@ -357,7 +357,7 @@ function update() {
     if(activePad) {
       // Process buttons and axes for the Gear VR touch panel
       activePad.buttons.forEach(function (gamepadButton, buttonIndex) {
-        var cameraForward = dolly.getWorldDirection(new THREE.Vector3());
+        var cameraForward = camera.getWorldDirection(new THREE.Vector3());
         var cameraSpeed = 0;
         if (buttonIndex === 0 && gamepadButton.pressed) {
           // Handle tap
