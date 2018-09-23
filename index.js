@@ -60,7 +60,7 @@ if(navigator.getVRDisplays){
   document.body.appendChild(
     WEBVR.createButton(renderer, {frameOfReferenceType: "head-model"})
   );
-  dolly.position.set(2000, 500, -2000);
+  dolly.position.set(2000, 500, 2500);
 }
 else{
   console.log("No VR displays detected");
