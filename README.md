@@ -7,6 +7,8 @@ This is a fun project im making that utilizes three.js for the 3D rendering and 
 ## Controls
 - Clickpad = fly forward in direction you are looking
 - Trigger  = fly backwards from direction you are looking
+- Swipe Down = Speed Down
+- Swipe Up = Speed Up
 - More controls on the way...
 
 ## Scale
