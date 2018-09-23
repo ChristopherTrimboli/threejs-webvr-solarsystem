@@ -65,7 +65,7 @@ if(navigator.getVRDisplays){
 else{
   console.log("No VR displays detected");
   controls.minDistance = 1000;
-  controls.maxDistance = 50000;
+  controls.maxDistance = 70000;
   controls.update();
   window.addEventListener("resize", onWindowResize, false);
   function onWindowResize() {
@@ -180,7 +180,7 @@ for (let i = 0; i < 6; i++)
     side: THREE.FrontSide
   }));
 const starMaterial = new THREE.MeshFaceMaterial( materialArray );
-const starGeometry = new THREE.CubeGeometry(100000, 100000, -100000);
+const starGeometry = new THREE.CubeGeometry(120000, 120000, -120000);
 const starbox = new THREE.Mesh(starGeometry, starMaterial);
 scene.add(starbox);
 
@@ -219,23 +219,39 @@ scene.add( light );
 light.shadow.mapSize.width = 2048;
 light.shadow.mapSize.height = 2048;
 light.shadow.camera.near = 0.5;
-light.shadow.camera.far = 15000;
+light.shadow.camera.far = 50000;
 
 // create mercury
 
 const mercuryTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_mercury.jpg' );
 const mercuryMaterial = new THREE.MeshStandardMaterial( { map: mercuryTexture, metalness: 0.0, roughness: 1.0 } );
 
-const mercuryGeometry = new THREE.SphereGeometry(10, 20, 20);
+const mercuryGeometry = new THREE.SphereGeometry(49, 20, 20);
 const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
 mercury.castShadow = mercury.receiveShadow = true;
 scene.add(mercury);
-mercury.position.x = 927;
+mercury.position.x = 580 + 695;
 
 // Orbit mercury around the sun
 const mercuryPivot = new THREE.Object3D();
 center.add(mercuryPivot);
 mercuryPivot.add(mercury);
+
+// create venus
+
+const venusTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_venus_surface.jpg' );
+const venusMaterial = new THREE.MeshStandardMaterial( { map: venusTexture, metalness: 0.0, roughness: 1.0 } );
+
+const venusGeometry = new THREE.SphereGeometry(121, 30, 30);
+const venus = new THREE.Mesh(venusGeometry, venusMaterial);
+venus.castShadow = venus.receiveShadow = true;
+scene.add(venus);
+venus.position.x = 1082 + 695;
+
+// Orbit venus around the sun
+const venusPivot = new THREE.Object3D();
+center.add(venusPivot);
+venusPivot.add(venus);
 
 // Create Earth
 
@@ -247,7 +263,7 @@ earthMaterial.roughnessMap = earthRoughTex;
 
 const earthGeometry = new THREE.SphereGeometry(127, 30, 30);
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-earth.position.x = 1496;
+earth.position.x = 1496 + 695;
 earth.castShadow = earth.receiveShadow = true;
 earth.material.metalness = 0.1;
 scene.add(earth);
@@ -283,7 +299,7 @@ const marsGeometry = new THREE.SphereGeometry(68, 30, 30);
 const mars = new THREE.Mesh(marsGeometry, marsMaterial);
 mars.castShadow = mars.receiveShadow = true;
 scene.add(mars);
-mars.position.x = 2627;
+mars.position.x = 2279 + 695;
 
 // Orbit mars around the sun
 const marsPivot = new THREE.Object3D();
@@ -299,7 +315,7 @@ const jupiterGeometry = new THREE.SphereGeometry(1398, 40, 40);
 const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
 jupiter.castShadow = jupiter.receiveShadow = true;
 scene.add(jupiter);
-jupiter.position.x = 8133;
+jupiter.position.x = 7785 + 695;
 
 // Orbit Jupiter around the sun
 
@@ -307,22 +323,78 @@ const jupiterPivot = new THREE.Object3D();
 center.add(jupiterPivot);
 jupiterPivot.add(jupiter);
 
+// create saturn
+
+const saturnTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_saturn.jpg' );
+const saturnMaterial = new THREE.MeshStandardMaterial( { map: saturnTexture, metalness: 0.0, roughness: 1.0 } );
+
+const saturnGeometry = new THREE.SphereGeometry(1164, 50, 50);
+const saturn = new THREE.Mesh(saturnGeometry, saturnMaterial);
+saturn.castShadow = saturn.receiveShadow = true;
+scene.add(saturn);
+saturn.position.x = 14330 + 695;
+
+// Orbit saturn around the sun
+const saturnPivot = new THREE.Object3D();
+center.add(saturnPivot);
+saturnPivot.add(saturn);
+
+// create uranus
+
+const uranusTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_uranus.jpg' );
+const uranusMaterial = new THREE.MeshStandardMaterial( { map: uranusTexture, metalness: 0.0, roughness: 1.0 } );
+
+const uranusGeometry = new THREE.SphereGeometry(507, 40, 40);
+const uranus = new THREE.Mesh(uranusGeometry, uranusMaterial);
+uranus.castShadow = uranus.receiveShadow = true;
+scene.add(uranus);
+uranus.position.x = 28700 + 695;
+
+// Orbit uranus around the sun
+const uranusPivot = new THREE.Object3D();
+center.add(uranusPivot);
+uranusPivot.add(uranus);
+
+// create neptune
+
+const neptuneTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_neptune.jpg' );
+const neptuneMaterial = new THREE.MeshStandardMaterial( { map: neptuneTexture, metalness: 0.0, roughness: 1.0 } );
+
+const neptuneGeometry = new THREE.SphereGeometry(492, 50, 50);
+const neptune = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
+neptune.castShadow = neptune.receiveShadow = true;
+scene.add(neptune);
+neptune.position.x = 44950 + 695;
+
+// Orbit neptune around the sun
+const neptunePivot = new THREE.Object3D();
+center.add(neptunePivot);
+neptunePivot.add(neptune);
+
 
 const spinPlanets = function () {
   sun.rotation.y += 0.0001;
-  mercury.rotation.y += 0.0002;
+  mercury.rotation.y -= 0.0002;
+  venus.rotation.y -= 0.0003;
   earth.rotation.y += 0.0004;
-  moon.rotation.y += 0.0002;
+  moon.rotation.y -= 0.0002;
   mars.rotation.y += 0.0002;
-  jupiter.rotation.y += 0.0002;
+  jupiter.rotation.y += 0.0005;
+  saturn.rotation.y -= 0.0003;
+  uranus.rotation.y += 0.0003;
+  neptune.rotation.y -= 0.0003;
 };
 
 const orbitPlanets = function () {
   mercuryPivot.rotation.y += 0.0001;
-  earthPivot.rotation.y += 0.00008;
+  venusPivot.rotation.y -= 0.0001;
+  earthPivot.rotation.y += 0.00015;
   moonPivot.rotation.y += 0.003;
-  marsPivot.rotation.y += 0.0002;
-  jupiterPivot.rotation.y += 0.00002;
+  marsPivot.rotation.y -= 0.0002;
+  jupiterPivot.rotation.y += 0.0001;
+  saturnPivot.rotation.y -= 0.0003;
+  uranusPivot.rotation.y += 0.0002;
+  neptunePivot.rotation.y -= 0.0002;
 };
 
 
