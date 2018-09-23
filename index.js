@@ -9,7 +9,7 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHei
 
 const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.type = THREE.PCFShadowMap;
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
 
