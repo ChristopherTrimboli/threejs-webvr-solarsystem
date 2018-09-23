@@ -586,7 +586,7 @@ function update() {
         } else if (axisIndex === 1 && axisValue < 0 && state.lastAxes[axisIndex] >= 0 && !gamepadButton.pressed) {
           // Handle swipe up
           console.log('up');
-          if(boost >= 50 && boost <= 2000){
+          if(boost >= 0 && boost <= 2000){
             boost += 50;
           }
         } else if (axisIndex === 1 && axisValue > 0 && state.lastAxes[axisIndex] <= 0 && !gamepadButton.pressed) {
