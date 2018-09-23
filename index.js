@@ -49,7 +49,6 @@ const controls = new THREE.OrbitControls( camera );
 if(navigator.getVRDisplays){
   console.log("VR displays detected");
   renderer.vr.enabled = true;
-  renderer.vr.userHeight = 0;
   document.body.appendChild(
     WEBVR.createButton(renderer, {frameOfReferenceType: "head-model"})
   );
@@ -320,9 +319,14 @@ const orbitPlanets = function () {
 dolly = new THREE.Group();
 scene.add(dolly);
 dolly.add(camera);
+
 camera.position.x = -1000;
 camera.position.z = -2000;
 camera.position.y = 2000;
+
+dolly.position.x = -1000;
+dolly.position.z = -2000;
+dolly.position.y = 2000;
 
 const controllerMaterial = new THREE.MeshBasicMaterial( { color: 'red' } );
 const controllerGeometry = new THREE.SphereGeometry(0.5, 0.5, 0.5);
