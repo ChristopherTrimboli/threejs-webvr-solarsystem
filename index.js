@@ -320,6 +320,9 @@ const orbitPlanets = function () {
 dolly = new THREE.Group();
 scene.add(dolly);
 dolly.add(camera);
+dolly.position.x = 200;
+dolly.position.y = 200;
+dolly.rotate(90);
 
 const controllerMaterial = new THREE.MeshBasicMaterial( { color: 'red' } );
 const controllerGeometry = new THREE.SphereGeometry(0.5, 0.5, 0.5);
