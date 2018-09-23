@@ -237,6 +237,13 @@ const mercuryPivot = new THREE.Object3D();
 center.add(mercuryPivot);
 mercuryPivot.add(mercury);
 
+// mercury orbit line
+const mercuryOrbitGeometry = new THREE.TorusGeometry( (580 + 695), 3, 10, 60 );
+const mercuryOrbitMaterial = new THREE.MeshBasicMaterial( { color: 'grey'} );
+const mercuryOrbit = new THREE.Mesh( mercuryOrbitGeometry, mercuryOrbitMaterial );
+scene.add( mercuryOrbit );
+mercuryOrbit.rotation.x = THREE.Math.degToRad(90);
+
 // create venus
 
 const venusTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_venus_surface.jpg' );
@@ -252,6 +259,13 @@ venus.position.x = 1082 + 695;
 const venusPivot = new THREE.Object3D();
 center.add(venusPivot);
 venusPivot.add(venus);
+
+// venus orbit line
+const venusOrbitGeometry = new THREE.TorusGeometry( (1082 + 695), 3, 10, 70 );
+const venusOrbitMaterial = new THREE.MeshBasicMaterial( { color: 'yellow'} );
+const venusOrbit = new THREE.Mesh( venusOrbitGeometry, venusOrbitMaterial );
+scene.add( venusOrbit );
+venusOrbit.rotation.x = THREE.Math.degToRad(90);
 
 // Create Earth
 
@@ -272,6 +286,13 @@ scene.add(earth);
 const earthPivot = new THREE.Object3D();
 center.add(earthPivot);
 earthPivot.add(earth);
+
+// earth orbit line
+const earthOrbitGeometry = new THREE.TorusGeometry( (1496 + 695), 3, 10, 75 );
+const earthOrbitMaterial = new THREE.MeshBasicMaterial( { color: 'green'} );
+const earthOrbit = new THREE.Mesh( earthOrbitGeometry, earthOrbitMaterial );
+scene.add( earthOrbit );
+earthOrbit.rotation.x = THREE.Math.degToRad(90);
 
 // Create the Moon
 
@@ -306,6 +327,13 @@ const marsPivot = new THREE.Object3D();
 center.add(marsPivot);
 marsPivot.add(mars);
 
+// mars orbit line
+const marsOrbitGeometry = new THREE.TorusGeometry( (2279 + 695), 3, 10, 80 );
+const marsOrbitMaterial = new THREE.MeshBasicMaterial( { color: 'orange'} );
+const marsOrbit = new THREE.Mesh( marsOrbitGeometry, marsOrbitMaterial );
+scene.add( marsOrbit );
+marsOrbit.rotation.x = THREE.Math.degToRad(90);
+
 // Create jupiter
 
 const jupiterTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_jupiter.jpg' );
@@ -323,6 +351,14 @@ const jupiterPivot = new THREE.Object3D();
 center.add(jupiterPivot);
 jupiterPivot.add(jupiter);
 
+// jupiter orbit line
+const jupiterOrbitGeometry = new THREE.TorusGeometry( (7785 + 695), 3, 10, 100 );
+const jupiterOrbitMaterial = new THREE.MeshBasicMaterial( { color: 'tan'} );
+const jupiterOrbit = new THREE.Mesh( jupiterOrbitGeometry, jupiterOrbitMaterial );
+scene.add( jupiterOrbit );
+jupiterOrbit.rotation.x = THREE.Math.degToRad(90);
+
+
 // create saturn
 
 const saturnTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_saturn.jpg' );
@@ -338,6 +374,13 @@ saturn.position.x = 14330 + 695;
 const saturnPivot = new THREE.Object3D();
 center.add(saturnPivot);
 saturnPivot.add(saturn);
+
+// saturn orbit line
+const saturnOrbitGeometry = new THREE.TorusGeometry( (14330 + 695), 3, 10, 100 );
+const saturnOrbitMaterial = new THREE.MeshBasicMaterial( { color: 'brown'} );
+const saturnOrbit = new THREE.Mesh( saturnOrbitGeometry, saturnOrbitMaterial );
+scene.add( saturnOrbit );
+saturnOrbit.rotation.x = THREE.Math.degToRad(90);
 
 // create uranus
 
@@ -355,6 +398,13 @@ const uranusPivot = new THREE.Object3D();
 center.add(uranusPivot);
 uranusPivot.add(uranus);
 
+// uranus orbit line
+const uranusOrbitGeometry = new THREE.TorusGeometry( (28700 + 695), 3, 10, 100 );
+const uranusOrbitMaterial = new THREE.MeshBasicMaterial( { color: 'lightblue'} );
+const uranusOrbit = new THREE.Mesh( uranusOrbitGeometry, uranusOrbitMaterial );
+scene.add( uranusOrbit );
+uranusOrbit.rotation.x = THREE.Math.degToRad(90);
+
 // create neptune
 
 const neptuneTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_neptune.jpg' );
@@ -370,6 +420,13 @@ neptune.position.x = 44950 + 695;
 const neptunePivot = new THREE.Object3D();
 center.add(neptunePivot);
 neptunePivot.add(neptune);
+
+// neptune orbit line
+const neptuneOrbitGeometry = new THREE.TorusGeometry( (44950 + 695), 3, 10, 100 );
+const neptuneOrbitMaterial = new THREE.MeshBasicMaterial( { color: 'silver'} );
+const neptuneOrbit = new THREE.Mesh( neptuneOrbitGeometry, neptuneOrbitMaterial );
+scene.add( neptuneOrbit );
+neptuneOrbit.rotation.x = THREE.Math.degToRad(90);
 
 
 const spinPlanets = function () {
