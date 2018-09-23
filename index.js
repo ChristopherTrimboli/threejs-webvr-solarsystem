@@ -197,7 +197,7 @@ center.position.set(0,0,0);
 const sunTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_sun.jpg' );
 const sunMaterial = new THREE.MeshBasicMaterial( { map: sunTexture } );
 
-const sunGeometry = new THREE.SphereGeometry(695, 100, 100);
+const sunGeometry = new THREE.SphereGeometry(695, 60, 60);
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
 
@@ -208,17 +208,17 @@ light.position.set( 10, 10, 10 );
 light.castShadow = true;
 scene.add( light );
 
-light.shadow.mapSize.width = 2048 / 2;
-light.shadow.mapSize.height = 2048 / 2;
+light.shadow.mapSize.width = 2048;
+light.shadow.mapSize.height = 2048;
 light.shadow.camera.near = 0.5;
-light.shadow.camera.far = 50000;
+light.shadow.camera.far = 15000;
 
 // create mercury
 
 const mercuryTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_mercury.jpg' );
 const mercuryMaterial = new THREE.MeshStandardMaterial( { map: mercuryTexture, metalness: 0.0, roughness: 1.0 } );
 
-const mercuryGeometry = new THREE.SphereGeometry(10, 100, 100);
+const mercuryGeometry = new THREE.SphereGeometry(10, 20, 20);
 const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
 mercury.castShadow = mercury.receiveShadow = true;
 scene.add(mercury);
@@ -237,7 +237,7 @@ const earthMaterial = new THREE.MeshStandardMaterial( { map: earthTexture } );
 
 earthMaterial.roughnessMap = earthRoughTex;
 
-const earthGeometry = new THREE.SphereGeometry(127, 500, 500);
+const earthGeometry = new THREE.SphereGeometry(127, 30, 30);
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 earth.position.x = 1496;
 earth.castShadow = earth.receiveShadow = true;
@@ -254,7 +254,7 @@ earthPivot.add(earth);
 const moonTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_moon.jpg' );
 const moonMaterial = new THREE.MeshStandardMaterial( { map: moonTexture, metalness: 0.0, roughness: 1.0 } );
 
-const moonGeometry = new THREE.SphereGeometry(35, 100, 100);
+const moonGeometry = new THREE.SphereGeometry(35, 20, 20);
 const moon = new THREE.Mesh(moonGeometry, moonMaterial);
 moon.castShadow = moon.receiveShadow = true;
 scene.add(moon);
@@ -271,7 +271,7 @@ moonPivot.add(moon);
 const marsTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_mars.jpg' );
 const marsMaterial = new THREE.MeshStandardMaterial( { map: marsTexture, metalness: 0.0, roughness: 1.0 } );
 
-const marsGeometry = new THREE.SphereGeometry(68, 100, 100);
+const marsGeometry = new THREE.SphereGeometry(68, 30, 30);
 const mars = new THREE.Mesh(marsGeometry, marsMaterial);
 mars.castShadow = mars.receiveShadow = true;
 scene.add(mars);
@@ -287,7 +287,7 @@ marsPivot.add(mars);
 const jupiterTexture = new THREE.TextureLoader().load( './images/2kbodies/2k_jupiter.jpg' );
 const jupiterMaterial = new THREE.MeshStandardMaterial( { map: jupiterTexture, metalness: 0.0, roughness: 1.0 } );
 
-const jupiterGeometry = new THREE.SphereGeometry(1398, 20, 20);
+const jupiterGeometry = new THREE.SphereGeometry(1398, 40, 40);
 const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
 jupiter.castShadow = jupiter.receiveShadow = true;
 scene.add(jupiter);
