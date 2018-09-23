@@ -558,6 +558,7 @@ function update() {
     if(activePad) {
       // Process buttons and axes for the Gear VR touch panel
       activePad.buttons.forEach(function (gamepadButton, buttonIndex) {
+        cameraSpeed = 0;
         var cameraForward = camera.getWorldDirection(new THREE.Vector3());
         if (buttonIndex === 0 && gamepadButton.pressed) {
           // Handle tap
