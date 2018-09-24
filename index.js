@@ -20,7 +20,7 @@ camera.position.y = 2000;
 
 const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
 
@@ -248,8 +248,8 @@ light.position.set( 10, 10, 10 );
 light.castShadow = true;
 scene.add( light );
 
-light.shadow.mapSize.width = 2048;
-light.shadow.mapSize.height = 2048;
+light.shadow.mapSize.width = 512;
+light.shadow.mapSize.height = 512;
 light.shadow.camera.near = 0.5;
 light.shadow.camera.far = 80000;
 
@@ -596,12 +596,10 @@ function update() {
         var cameraForward = camera.getWorldDirection(new THREE.Vector3());
         if (buttonIndex === 0 && gamepadButton.pressed) {
           // Handle tap
-          console.log('tap');
           cameraSpeed = 600 + boost;
         }
         if (buttonIndex === 1 && gamepadButton.pressed && !state.lastButtons[buttonIndex]) {
           // Handle trigger
-          console.log('lmao1');
           cameraSpeed = -600 + (-boost);
         }
         dolly.translateOnAxis(cameraForward, cameraSpeed * delta);
