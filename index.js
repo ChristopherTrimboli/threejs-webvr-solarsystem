@@ -612,19 +612,15 @@ function update() {
         activePad.buttons.forEach(function (gamepadButton){
         if (axisIndex === 0 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
           // Handle swipe right
-          console.log('right')
         } else if (axisIndex === 0 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
           // Handle swipe left
-          console.log('left')
         } else if (axisIndex === 1 && axisValue < 0 && state.lastAxes[axisIndex] >= 0) {
           // Handle swipe up
-          console.log('up');
           if(boost >= 0 && boost <= 2000){
             boost += 50;
           }
         } else if (axisIndex === 1 && axisValue > 0 && state.lastAxes[axisIndex] <= 0) {
           // Handle swipe down
-          console.log('down');
           if(boost >= 50){
             boost -= 50;
           }
