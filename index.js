@@ -20,7 +20,7 @@ camera.position.y = 2000;
 
 const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild(renderer.domElement);
 
@@ -248,8 +248,8 @@ light.position.set( 10, 10, 10 );
 light.castShadow = true;
 scene.add( light );
 
-light.shadow.mapSize.width = 1024;
-light.shadow.mapSize.height = 1024;
+light.shadow.mapSize.width = 2048;
+light.shadow.mapSize.height = 2048;
 light.shadow.camera.near = 0.5;
 light.shadow.camera.far = 80000;
 
