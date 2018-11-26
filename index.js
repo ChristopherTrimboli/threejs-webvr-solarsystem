@@ -193,8 +193,7 @@ loader.load(
 
   // onError callback
   function ( err ) {
-    console.log( 'An error happened' );
-    console(err.stack)
+    console.log(err.stack)
   }
 );
 
