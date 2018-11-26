@@ -187,9 +187,9 @@ loader.load(
   },
 
   // onProgress callback
-  function ( xhr ) {
-    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-  },
+  // function ( xhr ) {
+  //   console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+  // },
 
   // onError callback
   function ( err ) {
