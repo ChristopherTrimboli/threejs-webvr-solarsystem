@@ -59,11 +59,11 @@ const controls = new THREE.OrbitControls( camera );
 
 if(navigator.getVRDisplays){
   console.log("VR displays detected");
-  renderer.vr.enabled = true;
-  document.body.appendChild(
-    WEBVR.createButton(renderer, {frameOfReferenceType: "head-model"})
-  );
-  dolly.position.set(2000, 500, 2500);
+  // renderer.vr.enabled = true;
+  // document.body.appendChild(
+  //   WEBVR.createButton(renderer, {frameOfReferenceType: "head-model"})
+  // );
+  // dolly.position.set(2000, 500, 2500);
 }
 else{
   console.log("No VR displays detected");
@@ -193,7 +193,6 @@ loader.load(
 
   // onError callback
   function ( err ) {
-    console.log(err.stack)
   }
 );
 
