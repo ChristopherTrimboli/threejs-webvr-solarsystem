@@ -2,7 +2,7 @@
 This is a fun project im making that utilizes three.js for the 3D rendering and webVR for the VR support.
 100% Javascript and runs in Browser. Works perfect with Oculus as GearVR is my dev hardware.
 
-#### Try it out: https://chriseddy.github.io/threejs-webvr-solarsystem/
+#### Try it out: https://christophertrimboli.github.io/threejs-webvr-solarsystem/
 
 ## Controls
 - Clickpad = fly forward in direction you are looking
